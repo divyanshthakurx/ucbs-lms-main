@@ -1,9 +1,20 @@
 import "./output.css";
+import { Routes, Route } from "react-router-dom";
+import UserNavigation from "./routes/user-navigation/user-navigation.component";
+import BooksList from "./components/books-list/books-list.component";
+import Notification from "./components/notification/notification.component";
+import IssuedBooks from "./components/issued-books/issued-books.component"
 
 const App = () => {
   return (
     <>
-        <h1>This is App</h1>
+        <Routes>
+          <Route path="/" element={<UserNavigation/>}>
+            <Route path="/bookInventory" element={<BooksList/>}/>
+            <Route path="/notifications" element={<Notification/>}/>
+            <Route path="/issuedBooks" element={<IssuedBooks/>}/>
+          </Route>
+        </Routes>
     </>
   );
 }
