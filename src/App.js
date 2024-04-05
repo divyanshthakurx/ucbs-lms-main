@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import UserNavigation from "./routes/user-navigation/user-navigation.component";
 import BooksList from "./components/books-list/books-list.component";
 import Notification from "./components/notification/notification.component";
-import IssuedBooks from "./components/issued-books/issued-books.component"
+import IssuedBooks from "./components/issued-books/issued-books.component";
+import Footer from "./components/footer/footer.component";
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
             <Route path="/issuedBooks" element={<IssuedBooks/>}/>
           </Route>
         </Routes>
+
+        <Footer />
     </>
   );
 }
