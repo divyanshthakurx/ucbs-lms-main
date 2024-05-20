@@ -1,11 +1,11 @@
 const Book = ({book_item}) => {
-    const {name, description, author} = book_item;
+    const {name, description, author, image_URL} = book_item;
 
     return(
         <>
-            <div className="mt-14">
+            <div className="mt-14 flex-1">
                 <div className="w-full">
-                    <img className="w-full" src="https://picsum.photos/200/300" alt=""></img>
+                    <img className="" src={image_URL} alt={name}></img>
                 </div>
                 <div className="my-4">
                     <div>
@@ -18,7 +18,6 @@ const Book = ({book_item}) => {
                         <h3>{description}</h3>
                     </div> 
                 </div>
-                
             </div>
         </>
     )

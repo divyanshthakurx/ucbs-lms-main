@@ -2,9 +2,10 @@ import "./output.css";
 
 import { Routes, Route } from "react-router-dom";
 import UserNavigation from "./routes/user-navigation/user-navigation.component";
-import BooksList from "./components/books-list/books-list.component";
-import Notification from "./components/notification/notification.component";
+import ManageBooks from "./routes/manage-books/manage-books.component";
+import Notification from "./routes/notification/notification.component";
 import IssuedBooks from "./components/issued-books/issued-books.component";
+import UsersList from "./components/users-list/users-list.component";
 import Footer from "./components/footer/footer.component";
 
 const App = () => {
@@ -12,9 +13,10 @@ const App = () => {
     <>
         <Routes>
           <Route path="/" element={<UserNavigation/>}>
-            <Route path="/bookInventory" element={<BooksList/>}/>
+            <Route path="/ManageBooks" element={<ManageBooks/>}/>
             <Route path="/notifications" element={<Notification/>}/>
             <Route path="/issuedBooks" element={<IssuedBooks/>}/>
+            <Route path="/usersList" element={<UsersList/>}/>
           </Route>
         </Routes>
 

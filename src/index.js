@@ -5,14 +5,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BooksProvider } from './context/books.context';
+import { UsersProvider } from './context/users.context';
+import { FinesProvider } from './context/fine-history.context';
+import { IssuedBooksProvider } from './context/issued-book-history.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <BooksProvider>
-        <App />
-      </BooksProvider>
+      <UsersProvider>
+        <BooksProvider>
+          <FinesProvider>
+            <IssuedBooksProvider>
+              <App />
+            </IssuedBooksProvider>
+          </FinesProvider>
+        </BooksProvider>
+      </UsersProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
