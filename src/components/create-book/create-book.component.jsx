@@ -15,7 +15,7 @@ const CreateNewBook = () => {
   const {createThisBook} = useContext(BooksContext);
     const [currentCreateBook, setcurrentCreateBook] = useState(defaultValues);
 
-    const {s_no, name, description, author, image_URL, stock, course} = currentCreateBook;
+    const {s_no, name, description, author, stock, course} = currentCreateBook;
 
     const handleChange = (e) => {
         const {name, value} = e.target;

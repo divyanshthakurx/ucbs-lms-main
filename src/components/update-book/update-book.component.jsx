@@ -3,8 +3,9 @@ import { useState, useContext, useEffect } from 'react';
 import { BooksContext } from '../../context/books.context';
 
 const UpdateBookComponent = () => {
-    const {updateThisBook, clickedBook} = useContext(BooksContext);
+    const {updateThisBook, deleteThisBook,clickedBook} = useContext(BooksContext);
     const [currentUpdateBook, setcurrentUpdateBook] = useState({});
+
     useEffect(() => {
         setcurrentUpdateBook(clickedBook);
     }, [clickedBook]);
@@ -18,7 +19,11 @@ const UpdateBookComponent = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         updateThisBook(currentUpdateBook);
-        console.log(currentUpdateBook);
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        deleteThisBook(currentUpdateBook);
     }
 
   return(
@@ -33,6 +38,7 @@ const UpdateBookComponent = () => {
         <FormInput type="number" placeholder="number of copies" onChange={handleChange} label="number of copies *" name="stock" value={stock}/>
         <FormInput type="text" placeholder="course" onChange={handleChange} label="Course" name="course" value={course}/>
         <button type="submit" onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-32">Submit</button>
+        <button type="button" onClick={handleDelete} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded w-32">Delete</button>
       </form>
     </div>
   )

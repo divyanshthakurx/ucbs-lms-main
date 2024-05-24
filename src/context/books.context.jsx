@@ -11,11 +11,6 @@ export const BooksContext = createContext ({
     clickedBook: {},
 })
 
-const GetBook = (book, setclickedBook) => {
-  const result = getBook(book.$id);
-  result.then(result => setclickedBook(result));
-}
-
 const CreateBook = (book, currentBook) => {
   if (!book){
     return console.log("no book");
@@ -37,19 +32,21 @@ const CreateBook = (book, currentBook) => {
     } catch(error){
         console.log(error);
     }
-
   }
 }
 
 const DeleteBook = (book) => {
-  
+  deleteBook(book.$id);
 }
 
 const UpdateBook = (book) => {
   updateBook(book);
 }
 
-const books_array = listBooks();
+const GetBook = (book, setclickedBook) => {
+  const result = getBook(book.$id);
+  result.then(result => setclickedBook(result));
+}
 
 export const BooksProvider = ({children}) => {
     const [currentBook, setcurrentBook] = useState();
@@ -57,18 +54,18 @@ export const BooksProvider = ({children}) => {
 
     //Loads all the books in currentBook
     useEffect(()=>{
-        books_array.then(result => setcurrentBook(result.documents))
-    }, []);   
+      listBooks().then(result => setcurrentBook(result.documents));
+    }, []);
 
     const createThisBook = (book) => {
         CreateBook(book, currentBook);
     }
 
     const deleteThisBook = (book) => {
-        DeleteBook(book, currentBook);
+        DeleteBook(book);
     }
     const updateThisBook = (book) => {
-        UpdateBook(book, currentBook);
+        UpdateBook(book);
     }
     const getThisBook = (book) => {
         GetBook(book, setclickedBook);
