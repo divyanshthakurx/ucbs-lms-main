@@ -33,7 +33,6 @@ export const listBooks = async () => {
 
 export const deleteBook = async (DocID) => {
     const result = await databases.deleteDocument(
-
         '66431d5a00229c5bbd1f', // Database ID
         '66431da200196276fb0f', // Collection ID
         DocID, // Doc ID

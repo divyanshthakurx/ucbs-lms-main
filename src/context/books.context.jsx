@@ -52,7 +52,6 @@ export const BooksProvider = ({children}) => {
     const [currentBook, setcurrentBook] = useState();
     const [clickedBook, setclickedBook] = useState({});
 
-    //Loads all the books in currentBook
     useEffect(()=>{
       listBooks().then(result => setcurrentBook(result.documents));
     }, []);

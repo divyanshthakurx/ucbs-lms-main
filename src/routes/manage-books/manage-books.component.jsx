@@ -1,14 +1,21 @@
-import CreateNewBook from "../../components/create-book/create-book.component";
+import CreateNewBook from "../../components/book-create/create-book.component";
 import BooksList from "../../components/books-list/books-list.component";
-import UpdateBookComponent from "../../components/update-book/update-book.component";
+import UpdateBookComponent from "../../components/book-update/update-book.component";
 const ManageBooks = () => {
 
     return(
         <>
-            <h1>This is Books Management Route</h1>
-            <CreateNewBook/>
-            <UpdateBookComponent/>
-            <BooksList/>
+            <div className="p-10">
+                <div className="grid grid-cols-2 gap-5">
+                    <div className="border border-black pt-10 pb-10">
+                        <CreateNewBook/>
+                    </div>
+                    <div className="border border-black pt-10 pb-10">
+                        <UpdateBookComponent/>
+                    </div>
+                </div>
+                <BooksList/>
+            </div>
         </>
     )
 }

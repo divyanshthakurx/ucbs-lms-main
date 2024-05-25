@@ -1,13 +1,26 @@
 import { ID } from "appwrite";
 import { databases } from "./appwrite";
 
-export const createUser = async () => {
-
+export const createUser = async (user) => {
+    let { user_id, password, name, roll_no, course, year, fine, issued_book } = user;
+    user_id = parseInt(user_id);
+    roll_no = parseInt(roll_no);
+    year = parseInt(year);
+    fine = parseInt(fine);
     let result = await databases.createDocument(
         '66431d5a00229c5bbd1f', // Database ID
         '66431dad000f2a73cc5d', // Collection ID
         ID.unique(),
-        {}
+        {
+            user_id,
+            password,
+            name,
+            roll_no,
+            course,
+            year,
+            fine,
+            issued_book
+        }
     );
     return result;
 }
@@ -21,37 +34,44 @@ export const listUsers = async () => {
     return result;
 }
 
-export const deleteUser = async () => {
+export const deleteUser = async (DocID) => {
     const result = await databases.deleteDocument(
         '66431d5a00229c5bbd1f', // Database ID
         '66431dad000f2a73cc5d', // Collection ID
-        '', // Doc ID
+        DocID, // Doc ID
     );
     return result;
 }
 
-export const updateUser = async () => {
+export const updateUser = async (user) => {
+    let { user_id, password, name, roll_no, course, year, fine, issued_book } = user;
+    user_id = parseInt(user_id);
+    roll_no = parseInt(roll_no);
+    year = parseInt(year);
+    fine = parseInt(fine);
     const result = await databases.updateDocument(
         '66431d5a00229c5bbd1f', // Database ID
         '66431dad000f2a73cc5d', // Collection ID
-        '', // Doc ID
+        user.$id, // Doc ID
         {
-            user_id: 100000799,
-            password: "1000000067",
-            name: "zz1",
-            roll_no: 5555,
-            course: "bba",
-            year: 1,
+            user_id,
+            password,
+            name,
+            roll_no,
+            course,
+            year,
+            fine,
+            issued_book
         }
     );
     return result;
 }
 
-export const getUser = async () => {
+export const getUser = async (DocID) => {
     const result = await databases.getDocument(
         '66431d5a00229c5bbd1f', // Database ID
         '66431dad000f2a73cc5d', // Collection ID
-        '', // Doc ID
+        DocID, // Doc ID
     );
     return result;
 }
