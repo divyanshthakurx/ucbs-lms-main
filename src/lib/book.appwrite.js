@@ -1,9 +1,12 @@
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
 export const createBook = async (book) => {
-    let { s_no, name, description, author, image_URL, stock, course } = book;
+    let { s_no, book_no, image_URL, author, title, edition, year, pages, stock, course, description } = book;
     s_no = parseInt(s_no);
+    book_no = parseInt(book_no);
+    year = parseInt(year);
+    pages = parseInt(pages);
     stock = parseInt(stock);
     let result = await databases.createDocument(
         '66431d5a00229c5bbd1f', // Database ID
@@ -11,12 +14,16 @@ export const createBook = async (book) => {
         ID.unique(),
         {
             s_no,
-            name,
-            description,
-            author,
+            book_no,
             image_URL,
+            author,
+            title,
+            edition,
+            year,
+            pages,
             stock,
-            course
+            course,
+            description
         }
     );
     return result;
@@ -26,7 +33,7 @@ export const listBooks = async () => {
     const result = await databases.listDocuments(
         '66431d5a00229c5bbd1f', // Database ID
         '66431da200196276fb0f', // Collection ID
-        []
+        [Query.limit(5000)]
     );
     return result;
 }
@@ -41,19 +48,28 @@ export const deleteBook = async (DocID) => {
 }
 
 export const updateBook = async (book) => {
-    const { s_no, name, description, author, image_URL, stock, course } = book;
+    let { s_no, book_no, image_url, author, title, edition, year, pages, stock, course, description } = book;
+    s_no = parseInt(s_no);
+    book_no = parseInt(book_no);
+    year = parseInt(year);
+    pages = parseInt(pages);
+    stock = parseInt(stock);
     const result = await databases.updateDocument(
         '66431d5a00229c5bbd1f', // Database ID
         '66431da200196276fb0f', // Collection ID
         book.$id, // Doc ID
         {
             s_no,
-            name,
-            description,
+            book_no,
+            image_url,
             author,
-            image_URL,
+            title,
+            edition,
+            year,
+            pages,
             stock,
-            course
+            course,
+            description
         }
     );
     return result;

@@ -2,22 +2,23 @@ import { createContext, useState, useEffect } from "react";
 import { listBooks, deleteBook, getBook, createBook, updateBook } from '../lib/book.appwrite';
 
 export const BooksContext = createContext ({
-    currentBook: null,
-    setcurrentBook: () => null,
+    Books: null,
+    setBooks: () => null,
     getThisBook: () => null,
     createThisBook: () => null,
     deleteThisBook: () => null,
     updateThisBook: () => null,
     clickedBook: {},
+    setclickedBook: () => null,
 })
 
-const CreateBook = (book, currentBook) => {
+const CreateBook = (book, Books) => {
   if (!book){
     return console.log("no book");
   }
   let exist = false;
-  currentBook.map((curBook) => {
-    if (curBook.name === book.name || parseInt(curBook.s_no) === book.s_no) {
+  Books.map((curBook) => {
+    if (curBook.title === book.title || parseInt(curBook.s_no) === book.s_no) {
       exist = true;
     }
     return [];
@@ -37,10 +38,12 @@ const CreateBook = (book, currentBook) => {
 
 const DeleteBook = (book) => {
   deleteBook(book.$id);
+  alert("Book deleted successfully");
 }
 
 const UpdateBook = (book) => {
   updateBook(book);
+  alert("Book updated successfully");
 }
 
 const GetBook = (book, setclickedBook) => {
@@ -49,15 +52,14 @@ const GetBook = (book, setclickedBook) => {
 }
 
 export const BooksProvider = ({children}) => {
-    const [currentBook, setcurrentBook] = useState();
+    const [Books, setBooks] = useState();
     const [clickedBook, setclickedBook] = useState({});
-
     useEffect(()=>{
-      listBooks().then(result => setcurrentBook(result.documents));
+      listBooks().then(result => setBooks(result.documents));
     }, []);
 
     const createThisBook = (book) => {
-        CreateBook(book, currentBook);
+        CreateBook(book, Books);
     }
 
     const deleteThisBook = (book) => {
@@ -70,7 +72,7 @@ export const BooksProvider = ({children}) => {
         GetBook(book, setclickedBook);
     }
 
-    const value = {currentBook, setcurrentBook, getThisBook, createThisBook, deleteThisBook, updateThisBook, clickedBook};
+    const value = {Books, setBooks, getThisBook, createThisBook, deleteThisBook, updateThisBook, clickedBook, setclickedBook};
 
     return <BooksContext.Provider value={value}>{children}</BooksContext.Provider>
 }

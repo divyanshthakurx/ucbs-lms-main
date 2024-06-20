@@ -1,15 +1,16 @@
 import FormInput from '../input-field/input-field.component';
 import { useState, useContext, useEffect } from 'react';
 import { UsersContext } from '../../context/users.context';
+import { Link } from 'react-router-dom';
 const UpdateNewUser = () => {
-    const {updateThisUser, deleteThisUser, createThisUser,clickedUser} = useContext(UsersContext);
+    const {updateThisUser, deleteThisUser, createThisUser, clickedUser, setibookclick} = useContext(UsersContext);
     const [selectedUser, setselectedUser] = useState({});
 
     useEffect(() => {
         setselectedUser(clickedUser);
     }, [clickedUser]);
 
-    const {user_id, password, name, roll_no, course, year, fine, issued_book} = selectedUser;
+    const {user_id, password, name, roll_no, course, year, fine, book} = selectedUser;
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -30,6 +31,11 @@ const UpdateNewUser = () => {
         createThisUser(selectedUser);
     }
 
+    const handleBook = (e) => {
+        e.preventDefault();
+        setibookclick(true);
+    }
+
     return(
         <div className="w-full px-12">
             <div className="text-3xl md:text-4xl font-bold mb-8 mx-auto">
@@ -44,14 +50,16 @@ const UpdateNewUser = () => {
                     <FormInput type="text" placeholder="course" onChange={handleChange} label="Course *" name="course" value={course}/>
                     <FormInput type="text" placeholder="year" onChange={handleChange} label="Year *" name="year" value={year}/>
                     <FormInput type="number" placeholder="fine" onChange={handleChange} label="Fine" name="fine" value={fine}/>
-                    <FormInput type="text" placeholder="issued_book" onChange={handleChange} label="Issued_book" name="issued_book" value={issued_book}/>
+                    <FormInput type="text" placeholder="book" readOnly label="Issued Books" name="book" value={book ? book.map(books => books.title) : ""}/>
+
+                    {clickedUser.name && <button onClick={handleBook}><Link to="/ManageUsers/IssuedBooks">Books</Link></button>}
                 </form>
             </div>
             <div className="my-[3rem]">
             <div className="text-white flex justify-around">
-                <button className="bg-green-500 px-9 py-2 rounded-xl hover:bg-green-600" type="submit" onClick={handleAdd}>Add</button>
+                <button className="bg-blue-500 px-9 py-2 rounded-xl hover:bg-blue-600" type="submit" onClick={handleAdd}>Add</button>
                 <button className="bg-green-500 px-9 py-2 rounded-xl hover:bg-green-600" type="submit" onClick={handleSubmit}>Submit</button>
-                <button className="bg-green-500 px-9 py-2 rounded-xl hover:bg-green-600" type="button" onClick={handleDelete}>Delete</button>
+                <button className="bg-red-500 px-9 py-2 rounded-xl hover:bg-red-600" type="button" onClick={handleDelete}>Delete</button>
             </div>
         </div>
         </div>

@@ -1,17 +1,17 @@
 import { useContext } from "react";
 import {UsersContext} from "../../context/users.context";
 const User = ({user_item}) => {
-    const {getThisUser} = useContext(UsersContext);
+    const {setclickedUser} = useContext(UsersContext);
     const { name, roll_no, course, year} = user_item;
     const handleClick = () => {
-        getThisUser(user_item);
+        setclickedUser(user_item);
     }
 
     return(
         <>
-            <div className="mt-14 flex-1">
-                <div className="w-full" >
-                    <img className="cursor-pointer w-72" onClick={handleClick} src="https://cdn.wallpapersafari.com/25/98/ZdwuVI.jpg" alt={name}></img>
+            <div className="mt-14">
+                <div className="w-full">
+                    <img className="cursor-pointer w-52" onClick={handleClick} src="https://cdn.wallpapersafari.com/25/98/ZdwuVI.jpg" alt={name}></img>
                 </div>
                 <div className="my-4">
                     <div>

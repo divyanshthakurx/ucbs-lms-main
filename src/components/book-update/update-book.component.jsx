@@ -10,7 +10,7 @@ const UpdateBookComponent = () => {
         clickedBook && setselectedBook(clickedBook);
     }, [clickedBook]);
     
-    const {s_no, name, description, author, stock, course, image_URL} = selectedBook;
+    const {s_no, title, description, author, stock, course, image_url} = selectedBook;
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -37,16 +37,15 @@ const UpdateBookComponent = () => {
           <h1 className="w-[22vw]">Manage Book</h1>
       </div>
       <div className="text-xl font-semibold">
-        <form>
-          <FormInput type="text" placeholder="image_URL" onChange={handleChange} label="Book Image URL" name="image_URL" value={image_URL}/>
+        <form id='book_form'>
+          <FormInput type="text" placeholder="image_url" onChange={handleChange} label="Book Image URL" name="image_url" value={image_url}/>
           <FormInput type="number" placeholder="s_no" onChange={handleChange} label="Serial Number *" name="s_no" value={s_no}/>
-          <FormInput type="text" placeholder="name" onChange={handleChange} label="Book Name *" name="name" value={name}/>
+          <FormInput type="text" placeholder="name" onChange={handleChange} label="Book Name *" name="title" value={title}/>
           <FormInput type="text" placeholder="author" onChange={handleChange} label="Book Author *" name="author" value={author}/>
           <FormInput type="text" placeholder="course" onChange={handleChange} label="Course" name="course" value={course}/>
           <FormInput type="number" placeholder="number of copies" onChange={handleChange} label="number of copies *" name="stock" value={stock}/>
           <label>Description</label>
           <textarea className="mt-2 h-32 w-[460px] placeholder:font-normal placeholder:text-gray-500 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="description" placeholder="description" onChange={handleChange} value={description}></textarea>
-          <FormInput type="text" placeholder="description" onChange={handleChange} label="Book Description" name="description" value={description}/>
         </form>
       </div>
       <div className="my-[3rem]">

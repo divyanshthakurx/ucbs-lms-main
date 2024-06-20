@@ -26,9 +26,9 @@ const UsersList = () => {
 
                 <div className="w-[46vw]">
                     <div className="bg-black grid grid-cols-4 gap-4 place-items-center font-semibold text-xl text-white w-full rounded-t-2xl">
-                        <div>Book ID</div>
-                        <div className="justify-self-start">Book Details</div>
-                        <div className="justify-self-end">Book Cover</div>
+                        <div className="justify-self-end">User Cover</div>
+                        <div className="justify-self-start">User Details</div>
+                        <div>User ID</div>
                     </div>
                     {filteredList && filteredList.sort((a, b) => a.name.localeCompare(b.name)).map(user => <User key={user.user_id} user_item={user} />)}
                 </div>

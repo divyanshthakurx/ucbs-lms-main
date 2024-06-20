@@ -9,6 +9,8 @@ export const UsersContext = createContext ({
     deleteThisUser: () => null,
     updateThisUser: () => null,
     clickedUser: {},
+    setclickedUser: () => null,
+    ibookclick: false,
 })
 
 const CreateUser = (User, currentUser) => {
@@ -52,6 +54,7 @@ const GetUser = (User, setclickedUser) => {
 export const UsersProvider = ({children}) => {
     const [currentUser, setcurrentUser] = useState();
     const [clickedUser, setclickedUser] = useState({});
+    const [ibookclick, setibookclick] = useState();
 
     useEffect(()=>{
         listUsers().then(result => setcurrentUser(result.documents))
@@ -71,7 +74,7 @@ export const UsersProvider = ({children}) => {
         GetUser(User, setclickedUser);
     }
 
-    const value = {currentUser, setcurrentUser, getThisUser, createThisUser, deleteThisUser, updateThisUser, clickedUser};
+    const value = {currentUser, setcurrentUser, getThisUser, createThisUser, deleteThisUser, updateThisUser, clickedUser, setclickedUser, ibookclick, setibookclick};
 
     return <UsersContext.Provider value={value}>{children}</UsersContext.Provider>
 }

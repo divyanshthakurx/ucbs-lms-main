@@ -4,13 +4,13 @@ import Book from "../book/book.component";
 
 export let selectedBook = {}
 const BooksList = () => {
-  const {currentBook} = useContext(BooksContext);
+  const {Books} = useContext(BooksContext);
   const [userSearch, setuserSearch] = useState("");
   const [course, setcourse] = useState("");
 
   const handleChange = ({ target: { value } }) => setuserSearch(value);
   const handleCourse = ({target: {value}}) => setcourse(value);
-  const filteredList = currentBook && currentBook.filter(book => book.name.toLowerCase().includes(userSearch.toLowerCase())).filter(book => book.course.toLowerCase().includes(course.toLowerCase()));
+  const filteredList = Books && Books.filter(book => book.title.toLowerCase().includes(userSearch.toLowerCase())).filter(book => book.course.toLowerCase().includes(course.toLowerCase()));
 
   return(
     <>
@@ -20,7 +20,7 @@ const BooksList = () => {
           <div className="relative">
             <select className="block appearance-none w-52 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={handleCourse}>
               <option value="B">All</option>
-              <option value="BBA">BBA</option>
+              <option value="BBA">BBA</option>  
               <option value="BCA">BCA</option>
             </select>
           </div>
@@ -32,7 +32,7 @@ const BooksList = () => {
               <div className="justify-self-start">Book Details</div>
               <div className="justify-self-end">Book Cover</div>
           </div>
-          {filteredList && filteredList.sort((a, b) => a.name.localeCompare(b.name)).map(book => <Book key={book.s_no} book_item={book} />)}
+          {filteredList && filteredList.filter((_, idx) => idx < 5).sort((a, b) => a.title.localeCompare(b.title)).map(book => <Book key={book.s_no} book_item={book} />)}
         </div>
       </div>
     </>

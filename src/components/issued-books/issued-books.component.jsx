@@ -1,35 +1,71 @@
-import Book from "../book/book.component";
+import { useContext, useEffect, useState } from "react";
+import { redirect } from "react-router-dom";
+import { UsersContext } from "../../context/users.context";
 import { BooksContext } from "../../context/books.context";
-import { useContext } from "react";
 
 const IssuedBooks = () => {
-    const {currentBook} = useContext(BooksContext);
-    return(
-        <>
-            <main className="flex-1">
+  const { updateThisUser, clickedUser, ibookclick } = useContext(UsersContext);
+  const { clickedBook } = useContext(BooksContext);
+  const [books, setBooks] = useState([]);
 
-                <section>
-                    <div className="text-4xl font-bold my-4 mx-auto px-12">
-                        <h1 className="w-[28vw]">Your Books.</h1>
-                    </div>
-                </section>
+  useEffect(() => {
+    if (ibookclick === true) {
+        setBooks(clickedUser.book);
+    } else {
+        redirect("/ManageUsers");
+    }
+  }, [ibookclick, clickedUser]);
 
-                <section>
+  if(clickedBook.s_no){
+    if (clickedUser && clickedUser.book && clickedBook) {
+      const existingBook = clickedUser.book.find(b => b.s_no === clickedBook.s_no);
+      if (!existingBook) {
+        clickedUser.book.push(clickedBook);
+        updateThisUser(clickedUser);
+      } else {
+        console.log("Book already exists");
+      }
+    }
+  }
 
-                    {/* <div className="flex">
-                        <button className="px-5 py-2 border mx-2 rounded-lg border-black" onClick={createUser}>Create User</button>
-                    </div> */}
-                    
-                    <div className="w-full px-20">
+  console.log(clickedUser);
 
-                        {currentBook && currentBook.map(book => <Book key={book.s_no} book_item={book}/>)}
-                    </div>
+  if (!ibookclick) return null;
 
-                </section>
+  const handleDelete = (book) => {
+    const updatedBooks = books.filter((b) => b.s_no !== book.s_no);
+    setBooks(updatedBooks);
+    const updatedUser = { ...clickedUser, book: updatedBooks };
+    updateThisUser(updatedUser);
+  };
 
-            </main>
-        </>
-    )
-}
+  return (
+    <div>
+      <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
+        <p className="text-xl font-bold">{clickedUser.name}</p>
+        <p className="text-lg">Roll No: {clickedUser.roll_no}</p>
+        <p className="text-lg">Course: {clickedUser.course}</p>
+        <p className="text-lg">Year: {clickedUser.year}</p>
+      </div>
+
+      <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
+        <p className="text-xl font-bold">Issued Books</p>
+        <ul className="text-lg">
+          {books.map((book) => (
+            <li key={book.s_no}>
+              {book.title}
+              <button
+                className="ml-10 text-red-500 hover:text-red-700"
+                onClick={() => handleDelete(book)}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 export default IssuedBooks;
