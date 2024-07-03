@@ -1,5 +1,5 @@
-import BooksList from "../../components/books-list/books-list.component";
-import UpdateBookComponent from "../../components/book-update/update-book.component";
+import BooksList from "../../components/Books/books-list/books-list.component";
+import UpdateBookComponent from "../../components/Books/book-update/update-book.component";
 const ManageBooks = () => {
 
     return(

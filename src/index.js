@@ -6,8 +6,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BooksProvider } from './context/books.context';
 import { UsersProvider } from './context/users.context';
-import { FinesProvider } from './context/fine-history.context';
-import { IssuedBooksProvider } from './context/issued-book-history.context';
+import { UsersHistoryProvider } from './context/usershistory.context';
+import { BooksHistoryProvider } from './context/bookshistory.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,11 +15,11 @@ root.render(
     <BrowserRouter>
       <UsersProvider>
         <BooksProvider>
-          <FinesProvider>
-            <IssuedBooksProvider>
+          <UsersHistoryProvider>
+            <BooksHistoryProvider>
               <App />
-            </IssuedBooksProvider>
-          </FinesProvider>
+            </BooksHistoryProvider>
+          </UsersHistoryProvider>
         </BooksProvider>
       </UsersProvider>
     </BrowserRouter>

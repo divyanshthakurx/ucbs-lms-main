@@ -4,8 +4,8 @@ import { UsersContext } from "../../context/users.context";
 import { BooksContext } from "../../context/books.context";
 
 const IssuedBooks = () => {
-  const { updateThisUser, clickedUser, ibookclick } = useContext(UsersContext);
-  const { clickedBook } = useContext(BooksContext);
+  const { updateThisUser, clickedUser, setclickedUser, ibookclick } = useContext(UsersContext);
+  let { clickedBook } = useContext(BooksContext);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,9 @@ const IssuedBooks = () => {
 
   if(clickedBook.s_no){
     if (clickedUser && clickedUser.book && clickedBook) {
+      console.log(clickedUser.book.map(b => b.s_no), " ", clickedBook.s_no);
       const existingBook = clickedUser.book.find(b => b.s_no === clickedBook.s_no);
+      console.log(existingBook);
       if (!existingBook) {
         clickedUser.book.push(clickedBook);
         updateThisUser(clickedUser);
@@ -28,8 +30,6 @@ const IssuedBooks = () => {
     }
   }
 
-  console.log(clickedUser);
-
   if (!ibookclick) return null;
 
   const handleDelete = (book) => {
@@ -37,6 +37,7 @@ const IssuedBooks = () => {
     setBooks(updatedBooks);
     const updatedUser = { ...clickedUser, book: updatedBooks };
     updateThisUser(updatedUser);
+    setclickedUser(updatedUser);
   };
 
   return (

@@ -57,7 +57,7 @@ export const UsersProvider = ({children}) => {
     const [ibookclick, setibookclick] = useState();
 
     useEffect(()=>{
-        listUsers().then(result => setcurrentUser(result.documents))
+        listUsers().then(result => setcurrentUser(result.documents));
     }, []);
 
     const createThisUser = (User) => {

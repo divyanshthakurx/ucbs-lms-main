@@ -1,6 +1,6 @@
-import FormInput from '../input-field/input-field.component';
+import FormInput from '../../input-field/input-field.component';
 import { useState, useContext, useEffect } from 'react';
-import { BooksContext } from '../../context/books.context';
+import { BooksContext } from '../../../context/books.context';
 
 const UpdateBookComponent = () => {
     const {updateThisBook, deleteThisBook, createThisBook, clickedBook} = useContext(BooksContext);

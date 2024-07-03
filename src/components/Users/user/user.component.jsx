@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import {UsersContext} from "../../context/users.context";
+import {UsersContext} from "../../../context/users.context";
 const User = ({user_item}) => {
     const {setclickedUser} = useContext(UsersContext);
     const { name, roll_no, course, year} = user_item;

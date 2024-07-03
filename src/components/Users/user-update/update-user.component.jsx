@@ -1,6 +1,6 @@
-import FormInput from '../input-field/input-field.component';
+import FormInput from '../../input-field/input-field.component';
 import { useState, useContext, useEffect } from 'react';
-import { UsersContext } from '../../context/users.context';
+import { UsersContext } from '../../../context/users.context';
 import { Link } from 'react-router-dom';
 const UpdateNewUser = () => {
     const {updateThisUser, deleteThisUser, createThisUser, clickedUser, setibookclick} = useContext(UsersContext);

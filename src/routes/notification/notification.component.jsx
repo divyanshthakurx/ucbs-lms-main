@@ -1,14 +1,13 @@
+import UserBooksHistory from "../../components/History/history-user-books/userbookshistory.component";
+import FineHistory from "../../components/History/history-fines/finehistory.component";
+import BooksHistory from "../../components/History/history-books/bookshistory.component";
 const Notification = () => {
     return(
         <>
             <h1>History</h1>
-            <p className="mb-4">Issued Books:</p>
-            <div className="flex justify-evenly border border-black rounded-md w-3/4 m-auto">
-                <p>book name</p>
-                <p>Author</p>
-                <p>DOI</p>
-                <p>DOR</p>
-            </div>
+            <UserBooksHistory />
+            <FineHistory />
+            <BooksHistory />
         </>
     )
 }

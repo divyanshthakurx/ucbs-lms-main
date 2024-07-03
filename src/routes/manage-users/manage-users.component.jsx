@@ -1,5 +1,5 @@
-import UserList from "../../components/users-list/users-list.component";
-import UpdateNewUser from "../../components/user-update/update-user.component";
+import UserList from "../../components/Users/users-list/users-list.component";
+import UpdateNewUser from "../../components/Users/user-update/update-user.component";
 import { Outlet } from "react-router-dom";
 const ManageUsers = () => {
     return(
