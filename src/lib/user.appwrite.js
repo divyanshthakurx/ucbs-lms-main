@@ -1,5 +1,9 @@
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
+import { createUBHistory } from './usershistory.appwrite';
+
+const database_id = '66431d5a00229c5bbd1f';
+const collection_id = '66431dad000f2a73cc5d';
 
 export const createUser = async (user) => {
     let { user_id, password, name, roll_no, course, year, fine, issued_book } = user;
@@ -8,8 +12,8 @@ export const createUser = async (user) => {
     year = parseInt(year);
     fine = parseInt(fine);
     let result = await databases.createDocument(
-        '66431d5a00229c5bbd1f', // Database ID
-        '66431dad000f2a73cc5d', // Collection ID
+        database_id,
+        collection_id,
         ID.unique(),
         {
             user_id,
@@ -27,18 +31,18 @@ export const createUser = async (user) => {
 
 export const listUsers = async () => {
     const result = await databases.listDocuments(
-        '66431d5a00229c5bbd1f', // Database ID
-        '66431dad000f2a73cc5d', // Collection ID
-        []
+        database_id,
+        collection_id,
+        [Query.limit(5000)]
     );
     return result;
 }
 
 export const deleteUser = async (DocID) => {
     const result = await databases.deleteDocument(
-        '66431d5a00229c5bbd1f', // Database ID
-        '66431dad000f2a73cc5d', // Collection ID
-        DocID, // Doc ID
+        database_id,
+        collection_id,
+        DocID,
     );
     return result;
 }
@@ -50,9 +54,9 @@ export const updateUser = async (user) => {
     year = parseInt(year);
     fine = parseInt(fine);
     const result = await databases.updateDocument(
-        '66431d5a00229c5bbd1f', // Database ID
-        '66431dad000f2a73cc5d', // Collection ID
-        user.$id, // Doc ID
+        database_id,
+        collection_id,
+        user.$id,
         {
             user_id,
             password,
@@ -64,14 +68,15 @@ export const updateUser = async (user) => {
             book,
         }
     );
+    createUBHistory(user);
     return result;
 }
 
 export const getUser = async (DocID) => {
     const result = await databases.getDocument(
-        '66431d5a00229c5bbd1f', // Database ID
-        '66431dad000f2a73cc5d', // Collection ID
-        DocID, // Doc ID
+        database_id,
+        collection_id,
+        DocID,
     );
     return result;
 }

@@ -2,8 +2,8 @@ import { createContext, useState, useEffect } from "react";
 import { listUsers, deleteUser, getUser, createUser, updateUser } from '../lib/user.appwrite';
 
 export const UsersContext = createContext ({
-    currentUser: null,
-    setcurrentUser: () => null,
+    Users: null,
+    setUsers: () => null,
     getThisUser: () => null,
     createThisUser: () => null,
     deleteThisUser: () => null,
@@ -13,12 +13,12 @@ export const UsersContext = createContext ({
     ibookclick: false,
 })
 
-const CreateUser = (User, currentUser) => {
+const CreateUser = (User, Users) => {
   if (!User){
     return console.log("no User");
   }
   let exist = false;
-  currentUser.map((curUser) => {
+  Users.map((curUser) => {
     if (curUser.name === User.name || parseInt(curUser.s_no) === User.s_no) {
       exist = true;
     }
@@ -52,16 +52,16 @@ const GetUser = (User, setclickedUser) => {
 
 
 export const UsersProvider = ({children}) => {
-    const [currentUser, setcurrentUser] = useState();
+    const [Users, setUsers] = useState();
     const [clickedUser, setclickedUser] = useState({});
     const [ibookclick, setibookclick] = useState();
 
     useEffect(()=>{
-        listUsers().then(result => setcurrentUser(result.documents));
+        listUsers().then(result => setUsers(result.documents));
     }, []);
 
     const createThisUser = (User) => {
-        CreateUser(User, currentUser);
+        CreateUser(User, Users);
     }
 
     const deleteThisUser = (User) => {
@@ -74,7 +74,7 @@ export const UsersProvider = ({children}) => {
         GetUser(User, setclickedUser);
     }
 
-    const value = {currentUser, setcurrentUser, getThisUser, createThisUser, deleteThisUser, updateThisUser, clickedUser, setclickedUser, ibookclick, setibookclick};
+    const value = {Users, setUsers, getThisUser, createThisUser, deleteThisUser, updateThisUser, clickedUser, setclickedUser, ibookclick, setibookclick};
 
     return <UsersContext.Provider value={value}>{children}</UsersContext.Provider>
 }

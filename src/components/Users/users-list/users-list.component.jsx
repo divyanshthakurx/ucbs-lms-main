@@ -3,13 +3,13 @@ import { UsersContext } from '../../../context/users.context';
 import User from '../user/user.component';
 
 const UsersList = () => {
-    const { currentUser } = useContext(UsersContext);
+    const { Users } = useContext(UsersContext);
     const [userSearch, setuserSearch] = useState("");
     const [course, setcourse] = useState("");
 
     const handleChange = ({ target: { value } }) => setuserSearch(value);
     const handleCourse = ({target: {value}}) => setcourse(value);
-    const filteredList = currentUser && currentUser.filter(user => user.name.toLowerCase().includes(userSearch.toLowerCase())).filter(user => user.course.toLowerCase().includes(course.toLowerCase()));
+    const filteredList = Users && Users.filter(user => user.name.toLowerCase().includes(userSearch.toLowerCase())).filter(user => user.course.toLowerCase().includes(course.toLowerCase()));
     return(
         <>
             <div className="row-span-1">

@@ -24,6 +24,7 @@ const IssuedBooks = () => {
       if (!existingBook) {
         clickedUser.book.push(clickedBook);
         updateThisUser(clickedUser);
+        // create UB History for issued book
       } else {
         console.log("Book already exists");
       }
@@ -37,6 +38,7 @@ const IssuedBooks = () => {
     setBooks(updatedBooks);
     const updatedUser = { ...clickedUser, book: updatedBooks };
     updateThisUser(updatedUser);
+    // create UB History for returned book
     setclickedUser(updatedUser);
   };
 
