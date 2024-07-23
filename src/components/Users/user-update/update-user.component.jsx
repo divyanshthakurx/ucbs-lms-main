@@ -52,7 +52,7 @@ const UpdateNewUser = () => {
                     <FormInput type="number" placeholder="fine" onChange={handleChange} label="Fine" name="fine" value={fine}/>
                     <FormInput type="text" placeholder="book" readOnly label="Issued Books" name="book" value={book ? book.map(books => books.title) : ""}/>
 
-                    {clickedUser.name && <button onClick={handleBook}><Link to="/ManageUsers/IssuedBooks">Books</Link></button>}
+                    {clickedUser.name && <button onClick={handleBook}><Link to="/admin-dashboard/manage-users/issued-books">Books</Link></button>}
                 </form>
             </div>
             <div className="my-[3rem]">

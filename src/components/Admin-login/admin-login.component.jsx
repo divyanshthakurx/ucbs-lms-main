@@ -20,7 +20,7 @@ const AdminLogIn = () => {
       alert("Invalid Credentials");
     } else {
       localStorage.setItem('currentadmin', 'true');
-      return  navigate("/AdminDashboard");
+      return  navigate("/admin-dashboard");
     }
   }
 

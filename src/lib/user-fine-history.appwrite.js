@@ -2,9 +2,9 @@ import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
 const database_id = '66431d5a00229c5bbd1f';
-const collection_id = '66855041001f550300d9';
+const collection_id = '669e194d0003997a1c1d';
 
-export const createUBHistory = async (userid, IB, RB) => {
+export const createUFHistory = async (userid, FA, FP) => {
     const currentDate = new Date();
     const curDate = currentDate.toISOString();
     let result = await databases.createDocument(
@@ -14,14 +14,14 @@ export const createUBHistory = async (userid, IB, RB) => {
         {
             date: curDate,
             user: userid,
-            issued_book: IB,
-            returned_book: RB
+            fine_alloted: FA,
+            fine_paid: FP
         }
     );
     return result;
 }
 
-export const listUBHistory = async () => {
+export const listUFHistory = async () => {
     const result = await databases.listDocuments(
         database_id,
         collection_id,

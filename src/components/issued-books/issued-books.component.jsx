@@ -1,32 +1,27 @@
 import { useContext, useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
 import { UsersContext } from "../../context/users.context";
 import { BooksContext } from "../../context/books.context";
+import { createUBHistory } from "../../lib/usershistory.appwrite";
 
 const IssuedBooks = () => {
   const { updateThisUser, clickedUser, setclickedUser, ibookclick } = useContext(UsersContext);
-  let { clickedBook } = useContext(BooksContext);
+  let { clickedBook, setclickedBook } = useContext(BooksContext);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    if (ibookclick === true) {
-        setBooks(clickedUser.book);
-    } else {
-        redirect("/ManageUsers");
-    }
-  }, [ibookclick, clickedUser]);
+    setBooks(clickedUser.book);
+  }, [clickedUser]);
 
-  if(clickedBook.s_no){
-    if (clickedUser && clickedUser.book && clickedBook) {
-      console.log(clickedUser.book.map(b => b.s_no), " ", clickedBook.s_no);
+  if(clickedBook){
+    if (clickedUser && clickedUser.book && clickedBook.s_no) {
       const existingBook = clickedUser.book.find(b => b.s_no === clickedBook.s_no);
       console.log(existingBook);
       if (!existingBook) {
         clickedUser.book.push(clickedBook);
         updateThisUser(clickedUser);
-        // create UB History for issued book
+        clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id, null);
       } else {
-        console.log("Book already exists");
+        alert("Book already exists");
       }
     }
   }
@@ -38,8 +33,10 @@ const IssuedBooks = () => {
     setBooks(updatedBooks);
     const updatedUser = { ...clickedUser, book: updatedBooks };
     updateThisUser(updatedUser);
-    // create UB History for returned book
     setclickedUser(updatedUser);
+    setclickedBook(null);
+    console.log(books);
+    book.$id && createUBHistory(updatedUser.$id, null, book.$id);
   };
 
   return (
@@ -54,7 +51,7 @@ const IssuedBooks = () => {
       <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
         <p className="text-xl font-bold">Issued Books</p>
         <ul className="text-lg">
-          {books.map((book) => (
+          {books && books.map((book) => (
             <li key={book.s_no}>
               {book.title}
               <button

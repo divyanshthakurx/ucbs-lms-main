@@ -1,6 +1,5 @@
 import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
-import { createUBHistory } from './usershistory.appwrite';
 
 const database_id = '66431d5a00229c5bbd1f';
 const collection_id = '66431dad000f2a73cc5d';
@@ -68,7 +67,6 @@ export const updateUser = async (user) => {
             book,
         }
     );
-    createUBHistory(user);
     return result;
 }
 

@@ -20,6 +20,7 @@ const UserLogIn = () => {
       alert("Invalid Credentials");
     } else {
       localStorage.setItem('currentuser', 'true');
+      localStorage.setItem('currentuserCreds', user_id);
       return  navigate("/user-dashboard");
     }
   }
@@ -27,6 +28,7 @@ const UserLogIn = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.setItem('currentuser', 'false');
+    localStorage.removeItem('currentuserCreds');
     navigate("/log-in");
   }
   return (

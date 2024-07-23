@@ -15,6 +15,8 @@ import UserDashboard from "./routes/user-dashboard/user-dashboard.component";
 import AdminDashboard from "./routes/admin-dashboard/admin-dashboard.component";
 import AdminNav from "./components/admin-nav/admin-nav.component";
 import UserNav from "./components/user-nav/user-nav.component";
+import UserIssuedBooks from "./components/user-issued-books/user-issued-books.component";
+import UserNotifications from "./components/user-notifications/user-notifications.component";
 
 const App = () => {
   return (
@@ -25,7 +27,7 @@ const App = () => {
 
           {/* Admin Protected Routes */}
           <Route path="/admin-dashboard" element={<AdminProtectedRoute><AdminDashboard/></AdminProtectedRoute>}>
-            <Route path="navigation" element={<AdminNav/>}/>
+            <Route index element={<AdminNav/>}/>
             <Route path="manage-books" element={<ManageBooks/>}/>
             <Route path="history" element={<Notification/>}/>
             <Route path="manage-users" element={<ManageUsers/>}>
@@ -35,9 +37,10 @@ const App = () => {
 
           {/* User Protected Routes */}
           <Route path="/user-dashboard" element={<UserProtectedRoute><UserDashboard/></UserProtectedRoute>}>
-            <Route path="navigation" element={<UserNav/>}/>
-            <Route path="books-issued" element={<div className="flex justify-evenly"><IssuedBooks/><BooksList/></div>}/>
-            <Route path="notifications" element={<Notification/>}/>
+            <Route index element={<UserNav/>}/>
+            <Route path="book-inventory" element={<BooksList/>} />
+            <Route path="issued-books" element={<UserIssuedBooks/>}/>
+            <Route path="notifications" element={<UserNotifications/>} />
           </Route>
         </Routes>
 
