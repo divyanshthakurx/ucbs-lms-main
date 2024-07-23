@@ -8,13 +8,10 @@ import Notification from "./routes/notification/notification.component";
 import IssuedBooks from "./components/issued-books/issued-books.component";
 import BooksList from "./components/Books/books-list/books-list.component";
 import ManageUsers from "./routes/manage-users/manage-users.component";
-import Footer from "./components/footer/footer.component";
 import AdminProtectedRoute from "./routes/protected-route/adminProtected-route.component";
 import UserProtectedRoute from "./routes/protected-route/userProtected-route.component";
-import UserDashboard from "./routes/user-dashboard/user-dashboard.component";
-import AdminDashboard from "./routes/admin-dashboard/admin-dashboard.component";
-import AdminNav from "./components/admin-nav/admin-nav.component";
-import UserNav from "./components/user-nav/user-nav.component";
+import AdminNav from "./routes/admin-nav/admin-nav.component";
+import UserNav from "./routes/user-nav/user-nav.component";
 import UserIssuedBooks from "./components/user-issued-books/user-issued-books.component";
 import UserNotifications from "./components/user-notifications/user-notifications.component";
 
@@ -26,8 +23,7 @@ const App = () => {
           <Route path="/log-in" element={<LogIn/>}/>
 
           {/* Admin Protected Routes */}
-          <Route path="/admin-dashboard" element={<AdminProtectedRoute><AdminDashboard/></AdminProtectedRoute>}>
-            <Route index element={<AdminNav/>}/>
+          <Route path="/admin-dashboard" element={<AdminProtectedRoute><AdminNav/></AdminProtectedRoute>}>
             <Route path="manage-books" element={<ManageBooks/>}/>
             <Route path="history" element={<Notification/>}/>
             <Route path="manage-users" element={<ManageUsers/>}>
@@ -36,15 +32,12 @@ const App = () => {
           </Route>
 
           {/* User Protected Routes */}
-          <Route path="/user-dashboard" element={<UserProtectedRoute><UserDashboard/></UserProtectedRoute>}>
-            <Route index element={<UserNav/>}/>
+          <Route path="/user-dashboard" element={<UserProtectedRoute><UserNav/></UserProtectedRoute>}>
             <Route path="book-inventory" element={<BooksList/>} />
             <Route path="issued-books" element={<UserIssuedBooks/>}/>
             <Route path="notifications" element={<UserNotifications/>} />
           </Route>
         </Routes>
-
-        <Footer />
     </>
   );
 }

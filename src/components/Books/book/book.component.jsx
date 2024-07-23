@@ -9,28 +9,26 @@ const Book = ({book_item}) => {
 
     return(
         <>
-            <div className="bg-[#F0F0F0] w-full">
-                <div className="flex justify-around">
-                    <div className="my-6 grid grid-cols-4 gap-4 place-items-center place-content-center	">
-                        <div className="col-span-2">
+            <div className="flex justify-around">
+                <div className="mb-6 grid grid-cols-2 gap-1 place-items-center place-content-center	border border-gray-500 rounded-xl p-6">
+                    <div className="justify-self-start">
                         <img className="rounded-md cursor-pointer w-64" onClick={handleClick} src={image_url} alt={title} />
-                        </div>
+                    </div>
+                    <div>
                         <div>
-                            <div>
-                                <div className="font-bold text-2xl">{title}</div>
-                                <div>Author: <span className="font-semibold underline">{author}</span></div>
-                                <div>Course: <span className="font-semibold underline">{course}</span></div>
-                            </div>
-                            <div className="flex justify-between mt-6">
-                                <div className="font-semibold">BCA</div>
-                                <div>Stock Available: <span className="font-semibold">{stock}</span></div>
-                            </div>
+                            <div className="font-bold text-2xl">{title}</div>
+                            <div>Author: <span className="font-semibold underline">{author}</span></div>
+                            <div>Course: <span className="font-semibold underline">{course}</span></div>
                         </div>
-                        <div className="font-semibold">
-                            <div>{s_no}</div>
-                        </div>                           
-                    </div>      
-                </div>
+                        <div className="flex justify-between mt-6">
+                            <div className="font-semibold">BCA</div>
+                            <div>Stock Available: <span className="font-semibold">{stock}</span></div>
+                        </div>
+                    </div>
+                    <div className="font-semibold">
+                        <div>{s_no}</div>
+                    </div>                           
+                </div>      
             </div>
         </>
     )
