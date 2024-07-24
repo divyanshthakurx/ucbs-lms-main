@@ -1,11 +1,10 @@
-import { useContext, useState, useEffect } from "react";
-import { UsersHistoryContext } from '../../../context/usershistory.context';
+import { useState, useEffect } from "react";
+import { listUBHistory } from './../../../lib/usershistory.appwrite'
 const UserBooksHistory = () => {
-    const { listUsersHistory } = useContext(UsersHistoryContext);
     const [usersHistory, setUsersHistory] = useState();
 
     useEffect(() => {
-        listUsersHistory().then((data) => setUsersHistory(data.documents));
+        listUBHistory().then((data) => setUsersHistory(data.documents));
     }, []);
 
     return(
@@ -18,12 +17,13 @@ const UserBooksHistory = () => {
                 <p>Date</p>
             </div>
             {usersHistory && usersHistory.map((item) => {
+                console.log(item.return_date);
                 return(
                     <div key={item.$id} className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                         <p>{item.user.name}</p>
                         <p>{item.issued_book ? item.issued_book.title.slice(0,10) + (item.issued_book.title.length > 10 ? '...' : '') : 'null'}</p>
-                        <p>{item.returned_book ? item.returned_book.title.slice(0,10) + (item.returned_book.title.length > 10 ? '...' : '') : 'null'}</p>
-                        <p>{new Date(item.date).toLocaleDateString()}</p>
+                        <p>{new Date(item.issue_date).toLocaleDateString()}</p>
+                        <p>{new Date(item.return_date).toLocaleDateString()}</p>
                     </div>
                 )
             })}

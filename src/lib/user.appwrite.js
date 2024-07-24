@@ -7,6 +7,7 @@ const collection_id = '66431dad000f2a73cc5d';
 export const createUser = async (user) => {
     let { user_id, password, name, roll_no, course, year, fine, issued_book } = user;
     user_id = parseInt(user_id);
+    console.log(user_id);
     roll_no = parseInt(roll_no);
     year = parseInt(year);
     fine = parseInt(fine);
@@ -48,6 +49,7 @@ export const deleteUser = async (DocID) => {
 
 export const updateUser = async (user) => {
     let { user_id, password, name, roll_no, course, year, fine, book } = user;
+    console.log(course);
     user_id = parseInt(user_id);
     roll_no = parseInt(roll_no);
     year = parseInt(year);

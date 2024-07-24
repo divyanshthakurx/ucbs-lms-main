@@ -1,10 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
-import Footer from "../../components/footer/footer.component";
 import { ReactComponent as ManageBookImg } from "../../../src/assets/img/admin-dashboard/manage-book.svg";
 import { ReactComponent as ManageUserImg } from "../../../src/assets/img/admin-dashboard/manage-user.svg";
 import { ReactComponent as BookInventoryImg } from "../../../src/assets/img/admin-dashboard/book-inventory.svg";
 import { ReactComponent as HistoryImg } from "../../../src/assets/img/admin-dashboard/history.svg";
-import { ReactComponent as IssueBookImg } from "../../../src/assets/img/admin-dashboard/issue-book.svg";
 import { ReactComponent as IssueFineImg } from "../../../src/assets/img/admin-dashboard/issue-fine.svg";
 
 const AdminNav = () => {
@@ -60,14 +58,6 @@ const AdminNav = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/admin-dashboard/issue-book"}
-                className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <IssueBookImg/>
-                <span className="ml-3 text-black w-full hover:text-white">Issue Book</span>
-              </Link>
-            </li>
-            <li>
               <Link to={"/admin-dashboard/issue-fine"}
                 className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -105,7 +95,6 @@ const AdminNav = () => {
 
       <div className="p-4 md:ml-64 h-auto pt-20 mt-16">
         <Outlet/>
-        <Footer/>
       </div>
     </>
   )

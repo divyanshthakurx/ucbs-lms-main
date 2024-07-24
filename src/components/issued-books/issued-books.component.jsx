@@ -1,12 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../context/users.context";
 import { BooksContext } from "../../context/books.context";
-import { createUBHistory } from "../../lib/usershistory.appwrite";
+import { createUBHistory, listUBHistory, updateUBHistory } from "../../lib/usershistory.appwrite";
 
 const IssuedBooks = () => {
   const { updateThisUser, clickedUser, setclickedUser, ibookclick } = useContext(UsersContext);
   let { clickedBook, setclickedBook } = useContext(BooksContext);
   const [books, setBooks] = useState([]);
+  const [historyId, sethistoryId] = useState();
+
+  useEffect(() => {
+    historyId && updateUBHistory(historyId);
+    sethistoryId(null);
+  }, [historyId]);
 
   useEffect(() => {
     setBooks(clickedUser.book);
@@ -19,24 +25,30 @@ const IssuedBooks = () => {
       if (!existingBook) {
         clickedUser.book.push(clickedBook);
         updateThisUser(clickedUser);
-        clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id, null);
+        clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id);
       } else {
-        alert("Book already exists");
+        console.log("Book already exists");
       }
     }
   }
 
   if (!ibookclick) return null;
 
-  const handleDelete = (book) => {
+  const getHistoryId = (user_rno, book_sno) => {
+    listUBHistory().then((result) => {
+      const history = result.documents.find((h) => h.user.roll_no === user_rno && h.issued_book.s_no === book_sno);
+      sethistoryId(history ? history.$id : '');
+    });
+  }
+
+  const handleDelete = async (book) => {
     const updatedBooks = books.filter((b) => b.s_no !== book.s_no);
     setBooks(updatedBooks);
     const updatedUser = { ...clickedUser, book: updatedBooks };
     updateThisUser(updatedUser);
     setclickedUser(updatedUser);
     setclickedBook(null);
-    console.log(books);
-    book.$id && createUBHistory(updatedUser.$id, null, book.$id);
+    const historyId = getHistoryId(clickedUser.roll_no, book.s_no);
   };
 
   return (
