@@ -29,7 +29,7 @@ const UserNotifications = () => {
                         </div>
                     )
                 } else {
-                    return <h1 key={item.$id} className="text-3xl">No History</h1>;
+                    return;
                 }
             })}
         </>

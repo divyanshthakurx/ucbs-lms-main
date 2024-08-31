@@ -54,8 +54,8 @@ const UpdateNewUser = () => {
                                     <FormInput type="number" placeholder="roll_no" onChange={handleChange} label="Roll Number *" name="roll_no" value={roll_no}/>
                                     <div className="flex flex-col mb-4">
                                         <label htmlFor="">Course</label>
-                                        <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="course" id="course" onChange={handleChange}>
-                                            <option value="bba">All</option>
+                                        <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="course" id="course" value={course && course.toLowerCase()} onChange={handleChange}>
+                                            <option>Select</option>
                                             <option value="bca">BCA</option>
                                             <option value="bba">BBA</option>
                                         </select>
@@ -70,7 +70,8 @@ const UpdateNewUser = () => {
                                 <FormInput type="password" placeholder="password" onChange={handleChange} label="Password *" name="password" value={password}/>
                                 <div className="flex flex-col">
                                     <label htmlFor="">Year</label>
-                                    <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="year" id="year" onChange={handleChange}>
+                                    <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="year" id="year" value={year && year} onChange={handleChange}>
+                                        <option>Select</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>

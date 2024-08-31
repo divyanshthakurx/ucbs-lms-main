@@ -21,7 +21,6 @@ const Book = ({book_item}) => {
                             <div>Course: <span className="font-semibold underline">{course}</span></div>
                         </div>
                         <div className="flex justify-between mt-6">
-                            <div className="font-semibold">BCA</div>
                             <div>Stock Available: <span className="font-semibold">{stock}</span></div>
                         </div>
                     </div>

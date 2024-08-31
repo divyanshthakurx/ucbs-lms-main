@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const UserNav = () => {
     return(
@@ -7,8 +7,9 @@ const UserNav = () => {
           <div className="flex flex-col">
             <Link to="/user-dashboard/issued-books">Issued Books</Link>
             <Link to="/user-dashboard/book-inventory">Book Inventory</Link>
-            <Link to="/user-dashboard/notifications">Notification</Link>
+            <Link to="/user-dashboard/history">History</Link>
           </div>
+          <Outlet/>
       </>
     )
   }

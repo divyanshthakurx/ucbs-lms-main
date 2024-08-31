@@ -7,16 +7,18 @@ const collection_id = '66855032002ff367fbf7';
 export const createBooksHistory = async (bookid) => {
     const currentDate = new Date();
     const curDate = currentDate.toISOString();
-    let result = await databases.createDocument(
-        database_id,
-        collection_id,
-        ID.unique(),
-        {
-            added_book: bookid,
-            date: curDate
-        }
-    );
-    return result;
+    if(bookid) {
+        let result = await databases.createDocument(
+            database_id,
+            collection_id,
+            ID.unique(),
+            {
+                added_book: bookid,
+                date: curDate
+            }
+        );
+        return result;
+    }
 }
 
 export const listBooksHistory = async () => {

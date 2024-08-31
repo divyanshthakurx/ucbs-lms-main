@@ -10,7 +10,8 @@ const UpdateBookComponent = () => {
         clickedBook && setselectedBook(clickedBook);
     }, [clickedBook]);
     
-    const {s_no, title, description, author, stock, image_url} = selectedBook;
+    const {s_no, title, description, author, stock, course, image_url} = selectedBook;
+    console.log(course);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -37,7 +38,7 @@ const UpdateBookComponent = () => {
           <h1 className="w-fit">Manage Book</h1>
       </div>
       <div className="text-xl font-semibold">
-        <form className='flex flex-col gap-4' id='book_form'>
+        <form className="flex flex-col gap-4" id='book_form'>
           <div className="flex justify-between">
             <div className="flex flex-col gap-4">
               <FormInput type="text" placeholder="image_url" onChange={handleChange} label="Book Image URL" name="image_url" value={image_url}/>
@@ -50,9 +51,10 @@ const UpdateBookComponent = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <label htmlFor="">Course</label>
-            <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="books" id="books">
-                <option value="bba">All</option>
+            <label htmlFor="books">Course</label>
+            {course && console.log(course.toLowerCase())}
+            <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="books" id="books" defaultChecked={course ? course.toLowerCase() : 'b'}>
+                <option value="b">All</option>
                 <option value="bca">BCA</option>
                 <option value="bba">BBA</option>
             </select>
@@ -60,8 +62,8 @@ const UpdateBookComponent = () => {
           <FormInput type="number" placeholder="number of copies" onChange={handleChange} label="number of copies *" name="stock" value={stock}/>
           <div className="flex flex-col">
             <label>Description</label>
-            <textarea className="mt-2 px-2 w-full h-[14vh] font-normal placeholder:font-normal placeholder:text-gray-500 border border-black rounded-lg bg-[#F0F0F0]" name="description" placeholder="description" onChange={handleChange} value={description}></textarea>
-          </div> 
+            <textarea className="mt-2 px-2 w-full h-[14vh] font-normal placeholder:font-normal placeholder:text-gray-500 border border-black rounded-lg bg-[#F0F0F0]" name="description" placeholder="description" onChange={handleChange} value={description}/>
+          </div>
         </form>
       </div>
 

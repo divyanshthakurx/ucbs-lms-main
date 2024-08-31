@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { listUFHistory } from '../../../lib/user-fine-history.appwrite'
 const FineHistory = () => {
     const [usersHistory, setUsersHistory] = useState();

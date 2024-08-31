@@ -37,7 +37,7 @@ const App = () => {
         <Route path="/user-dashboard" element={<UserProtectedRoute><UserNav/></UserProtectedRoute>}>
           <Route path="book-inventory" element={<BooksList/>} />
           <Route path="issued-books" element={<UserIssuedBooks/>}/>
-          <Route path="notifications" element={<UserNotifications/>} />
+          <Route path="history" element={<UserNotifications/>} />
         </Route>
       </Routes>
     </>

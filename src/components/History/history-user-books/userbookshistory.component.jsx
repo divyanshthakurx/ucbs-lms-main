@@ -17,7 +17,6 @@ const UserBooksHistory = () => {
                 <p>Date</p>
             </div>
             {usersHistory && usersHistory.map((item) => {
-                console.log(item.return_date);
                 return(
                     <div key={item.$id} className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                         <p>{item.user.name}</p>

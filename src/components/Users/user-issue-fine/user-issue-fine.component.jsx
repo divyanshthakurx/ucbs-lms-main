@@ -1,16 +1,15 @@
 import FormInput from '../../input-field/input-field.component';
 import { useState, useContext, useEffect } from 'react';
 import { UsersContext } from '../../../context/users.context';
-import { Link } from 'react-router-dom';
 const UpdateIssueFine = () => {
-    const {updateThisUser, deleteThisUser, createThisUser, clickedUser, setibookclick} = useContext(UsersContext);
+    const {updateThisUser, clickedUser} = useContext(UsersContext);
     const [selectedUser, setselectedUser] = useState({});
 
     useEffect(() => {
         setselectedUser(clickedUser);
     }, [clickedUser]);
 
-    const {user_id, password, name, roll_no, course, year, book} = selectedUser;
+    const {user_id, fine, name, roll_no, course, year, amount_paid} = selectedUser;
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -21,19 +20,11 @@ const UpdateIssueFine = () => {
         updateThisUser(selectedUser);
     }
 
-    const handleDelete = (e) => {
-        e.preventDefault();
-        deleteThisUser(selectedUser);
-    }
-
-    const handleAdd = (e) => {
-        e.preventDefault();
-        createThisUser(selectedUser);
-    }
-
-    const handleBook = (e) => {
-        e.preventDefault();
-        setibookclick(true);
+    const handlePaid = (e) => {
+        if (e.target.checked) {
+            setselectedUser({...selectedUser, amount_paid: fine, fine: 0});
+        }
+        return;
     }
 
     return(
@@ -50,46 +41,44 @@ const UpdateIssueFine = () => {
                             <div>
                                 <div>
 
-                                    <FormInput type="text" placeholder="name" onChange={handleChange} label="Name *" name="name" value={name}/>
-                                    <FormInput type="number" placeholder="roll_no" onChange={handleChange} label="Roll Number *" name="roll_no" value={roll_no}/>
+                                    <FormInput type="text" placeholder="name" label="Name *" name="name" readOnly={true} value={name && name}/>
+                                    <FormInput type="number" placeholder="roll_no" label="Roll Number *" readOnly={true} name="roll_no" value={roll_no && roll_no}/>
                                     <div className="flex flex-col mb-4">
                                         <label htmlFor="">Course</label>
-                                        <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="Course" id="Course" onChange={handleChange} defaultValue={course}>
-                                            <option value="bba">All</option>
+                                        <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="Course" id="Course" disabled value={course && course.toLowerCase()}>
+                                            <option>Course</option>
                                             <option value="bca">BCA</option>
                                             <option value="bba">BBA</option>
                                         </select>
                                     </div>
-
+                                    <FormInput type="number" placeholder="Amount paid" label="Amount paid" name="amount_paid" value={amount_paid && amount_paid}/>
                                 </div>
                             </div>
 
                             <div className="flex flex-col">
 
-                                <FormInput type="number" placeholder="user_id" onChange={handleChange} label="User ID *" name="user_id" value={user_id}/>
-                                <FormInput type="password" placeholder="password" onChange={handleChange} label="Password *" name="password" value={password}/>
+                                <FormInput type="number" placeholder="user_id" label="User ID *" readOnly={true} name="user_id" value={user_id && user_id}/>
                                 <div className="flex flex-col">
                                     <label htmlFor="">Year</label>
-                                    <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="Year" id="Year" onChange={handleChange} defaultValue={year}>
+                                    <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="Year" id="Year" disabled value={year && year}>
+                                        <option>Year</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                     </select>
                                 </div>
-
+                                <div className='flex gap-2'>
+                                    <FormInput type="number" placeholder="fine" onChange={handleChange} label="Fine" name="fine" value={fine && fine}/>
+                                    <FormInput type="checkbox" label="Paid" name="pain" onChange={handlePaid}/>
+                                </div>
                             </div>
                         </div>
-
-                        <FormInput type="text" placeholder="book" readOnly label="Issued Books" name="book" value={book ? book.map(books => books.title) : ""}/>
-                        {clickedUser.name && <button onClick={handleBook}><Link to="/admin-dashboard/manage-users/issued-books">Books</Link></button>}
                     </form>
                 </div>
 
                 <div className="mt-6">
                     <div className="text-white flex justify-around">
-                        <button className="bg-green-500 px-9 py-2 rounded-xl" type="submit" onClick={handleAdd}>Add</button>
                         <button className="bg-blue-500 px-9 py-2 rounded-xl" type="submit" onClick={handleSubmit}>Submit</button>
-                        <button className="bg-red-500 px-9 py-2 rounded-xl" type="button" onClick={handleDelete}>Delete</button>
                     </div>
                 </div>
             </div>

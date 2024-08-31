@@ -21,18 +21,15 @@ const IssuedBooks = () => {
   if(clickedBook){
     if (clickedUser && clickedUser.book && clickedBook.s_no) {
       const existingBook = clickedUser.book.find(b => b.s_no === clickedBook.s_no);
-      console.log(existingBook);
       if (!existingBook) {
         clickedUser.book.push(clickedBook);
         updateThisUser(clickedUser);
         clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id);
       } else {
-        console.log("Book already exists");
+        return;
       }
     }
   }
-
-  if (!ibookclick) return null;
 
   const getHistoryId = (user_rno, book_sno) => {
     listUBHistory().then((result) => {
@@ -48,7 +45,7 @@ const IssuedBooks = () => {
     updateThisUser(updatedUser);
     setclickedUser(updatedUser);
     setclickedBook(null);
-    const historyId = getHistoryId(clickedUser.roll_no, book.s_no);
+    getHistoryId(clickedUser.roll_no, book.s_no);
   };
 
   return (
