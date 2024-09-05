@@ -29,7 +29,7 @@ const UserNotifications = () => {
                         </div>
                     )
                 } else {
-                    return;
+                    return [];
                 }
             })}
         </>

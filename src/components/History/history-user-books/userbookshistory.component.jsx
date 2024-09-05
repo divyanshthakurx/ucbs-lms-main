@@ -16,7 +16,7 @@ const UserBooksHistory = () => {
                 <p>Returen Book</p>
                 <p>Date</p>
             </div>
-            {usersHistory && usersHistory.map((item) => {
+            {usersHistory && usersHistory.sort((a, b) => new Date(b.issue_date) - new Date(a.issue_date)).map((item) => {
                 return(
                     <div key={item.$id} className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                         <p>{item.user.name}</p>

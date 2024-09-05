@@ -68,6 +68,7 @@ export const updateUser = async (user) => {
             book,
         }
     );
+    alert("User updated successfully");
     return result;
 }
 

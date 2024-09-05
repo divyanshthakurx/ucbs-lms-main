@@ -13,16 +13,16 @@ const FineHistory = () => {
             <div className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                 <p>User</p>
                 <p>Pending Fine</p>
-                <p>Paid Fine</p>
-                <p>Date</p>
+                <p>Fine alloted on</p>
+                <p>Fine paid on</p>
             </div>
-            {usersHistory && usersHistory.map((item) => {
+            {usersHistory && usersHistory.sort((a, b) => new Date(b.fine_alloted_on) - new Date(a.fine_alloted_on)).map((item) => {
                 return(
                     <div key={item.$id} className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                         <p>{item.user.name}</p>
-                        <p>{item.fine ? item.fine : 0}</p>
-                        <p>{item.paid_fine ? item.paid_fine : 0}</p>
-                        <p>{new Date(item.date).toLocaleDateString()}</p>
+                        <p>{item.amount ? item.amount : 0}</p>
+                        <p>{new Date(item.fine_alloted_on).toLocaleDateString()}</p>
+                        <p>{item.fine_paid_on ? (new Date(item.fine_paid_on).toLocaleDateString()) : 'Not paid'}</p>
                     </div>
                 )
             })}

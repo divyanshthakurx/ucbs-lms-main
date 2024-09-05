@@ -8,7 +8,7 @@ const UserProtectedRoute = ({children}) => {
     if (localStorage.getItem("currentuser") === "false") {
       navigate("/log-in");
     }
-  }, []);
+  });
 
   return children;
 };

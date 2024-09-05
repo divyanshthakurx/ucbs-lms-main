@@ -4,7 +4,7 @@ import { BooksContext } from "../../context/books.context";
 import { createUBHistory, listUBHistory, updateUBHistory } from "../../lib/usershistory.appwrite";
 
 const IssuedBooks = () => {
-  const { updateThisUser, clickedUser, setclickedUser, ibookclick } = useContext(UsersContext);
+  const { updateThisUser, clickedUser, setclickedUser } = useContext(UsersContext);
   let { clickedBook, setclickedBook } = useContext(BooksContext);
   const [books, setBooks] = useState([]);
   const [historyId, sethistoryId] = useState();

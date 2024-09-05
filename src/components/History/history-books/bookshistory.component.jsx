@@ -17,7 +17,7 @@ const UserBooksHistory = () => {
                 <p>Stock</p>
                 <p>Date</p>
             </div>
-            {BookHistory && BookHistory.map((item) => {
+            {BookHistory && BookHistory.sort((a, b) => new Date(b.date) - new Date(a.date)).map((item) => {
                 return(
                     <div key={item.$id} className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                         <p>{item.added_book && item.added_book.title.slice(0,10) + (item.added_book.title.length > 10 ? '...' : '')}</p>

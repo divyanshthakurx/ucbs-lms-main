@@ -4,17 +4,18 @@ import { databases } from "./appwrite";
 const database_id = '66431d5a00229c5bbd1f';
 const collection_id = '669e194d0003997a1c1d';
 
-export const createUFHistory = async (userid, FA) => {
+export const createUFHistory = async (userid, amount) => {
     const currentDate = new Date();
     const curDate = currentDate.toISOString();
+    const amt = parseInt(amount);
     let result = await databases.createDocument(
         database_id,
         collection_id,
         ID.unique(),
         {
-            date: curDate,
-            user: userid,
-            fine_alloted_on: FA
+            amount: amt,
+            fine_alloted_on: curDate,
+            user: userid
         }
     );
     return result;

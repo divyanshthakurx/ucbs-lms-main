@@ -8,7 +8,7 @@ const AdminProtectedRoute = ({children}) => {
     if (localStorage.getItem("currentadmin") === "false") {
       navigate("/log-in");
     }
-  }, []);
+  });
 
   return children;
 };

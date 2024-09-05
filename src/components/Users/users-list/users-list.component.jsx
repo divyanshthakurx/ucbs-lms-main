@@ -31,8 +31,8 @@ const UsersList = () => {
                 <div className="p-6 border grid grid-cols-2 place-items-center font-semibold text-xl">
                     <div className="justify-self-center">User Details</div>
                     <div className=" justify-self-center border-white rounded-xl px-4 py-1">
-                        <label htmlFor="">Course:</label>
-                        <select className="px-1 font-normal border border-black rounded-lg text-white bg-[#000000] " name="books" id="books" onChange={handleCourse}>
+                        <label htmlFor="users">Course:</label>
+                        <select className="px-1 font-normal border border-black rounded-lg text-white bg-[#000000] " name="users" id="users" onChange={handleCourse}>
                             <option value="b">All</option>
                             <option value="bca">BCA</option>
                             <option value="bba">BBA</option>
