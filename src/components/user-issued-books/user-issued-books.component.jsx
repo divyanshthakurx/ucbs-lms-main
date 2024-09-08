@@ -1,6 +1,7 @@
 import { useContext, useEffect ,useState } from "react";
 import { UsersContext } from "../../context/users.context";
 import { getUser } from "../../lib/user.appwrite";
+import ShowBook from "../Books/book-inventory/book-inventory.component";
 
 const UserIssuedBooks = () => {
     const [curUser, setCurUser] = useState({});
@@ -13,25 +14,43 @@ const UserIssuedBooks = () => {
     }, [user]);
 
     return (
-    <div>
-        <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
-        <p className="text-xl font-bold">{curUser.name}</p>
-        <p className="text-lg">Roll No: {curUser.roll_no}</p>
-        <p className="text-lg">Course: {curUser.course}</p>
-        <p className="text-lg">Year: {curUser.year}</p>
-        </div>
+        <>
 
-        <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
-        <p className="text-xl font-bold">Issued Books</p>
-        <ol className="list-decimal text-lg ml-12">
-            {curUser.book ? curUser.book.map((book) => (
-            <li key={book.s_no}>
-                {book.title}
-            </li>
-            )) : <p>No books issued</p>}
-        </ol>
-        </div>
-    </div>
+            {/* main body */}
+            <main className="pb-4 px-4 md:ml-64 h-full pt-20">
+                <div className="mb-4 h-full">
+
+                    <div>
+                        <div className="py-[2rem]">
+                            <div className="px-[2rem]">
+                                <div>
+                                    <h1 className="text-4xl font-bold">Issued Books.</h1>
+                                </div>                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <div className="px-[2rem] md:px-0 lg:px-[2rem]">
+                                                
+                                <div className="my-4">
+                                    <div className="w-full grid grid-cols-1 justify-items-center content-center gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5">
+                                    {curUser.book ? curUser.book.map((book) => (
+                                    <ShowBook key={book.s_no} book_item={book}></ShowBook>
+                                    )) : <p>No books issued</p>}
+                                    </div> 
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+
+            </main>
+
+        </>
     );
 };
 

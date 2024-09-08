@@ -13,13 +13,19 @@ import UserNav from "./routes/user-nav/user-nav.component";
 import UserIssuedBooks from "./components/user-issued-books/user-issued-books.component";
 import UserNotifications from "./components/user-notifications/user-notifications.component";
 import IssueFine from "./routes/issue-fine/issue-fine.component";
+import AdminLogIn from "./components/Admin-login/admin-login.component";
+import UserLogIn from "./components/user-login/user-login.component";
+import PayFine from "./components/pay-fine/pay-fine.component";
 
 const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/log-in" element={<LogIn/>}/>
+      <Route path="/" element={<Home/>} />
+        <Route path="/login" element={<LogIn/>}>
+          <Route index element={<UserLogIn/>} />
+          <Route path="admin-login" element={<AdminLogIn/>} />      
+        </Route>
 
         {/* Admin Protected Routes */}
         <Route path="/admin-dashboard" element={<AdminProtectedRoute><AdminNav/></AdminProtectedRoute>}>
@@ -32,9 +38,10 @@ const App = () => {
 
         {/* User Protected Routes */}
         <Route path="/user-dashboard" element={<UserProtectedRoute><UserNav/></UserProtectedRoute>}>
+          <Route index element={<UserIssuedBooks/>}/>
           <Route path="book-inventory" element={<BooksList/>} />
-          <Route path="issued-books" element={<UserIssuedBooks/>}/>
-          <Route path="history" element={<UserNotifications/>} />
+          <Route path="notifications" element={<UserNotifications/>} />
+          <Route path="pay-fine" element={<PayFine/>} />
         </Route>
       </Routes>
     </>
