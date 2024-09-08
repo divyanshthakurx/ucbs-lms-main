@@ -1,7 +1,7 @@
-import FormInput from '../../input-field/input-field.component';
 import { useState, useContext, useEffect } from 'react';
 import { UsersContext } from '../../../context/users.context';
-import { Link } from 'react-router-dom';
+import FormInput from '../../input-field/input-field.component';
+import IssuedBook from "../../issued-books/issued-books.component";
 const UpdateNewUser = () => {
     const {updateThisUser, deleteThisUser, createThisUser, clickedUser, setibookclick} = useContext(UsersContext);
     const [selectedUser, setselectedUser] = useState({});
@@ -80,9 +80,8 @@ const UpdateNewUser = () => {
 
                             </div>
                         </div>
-
-                        <FormInput type="text" placeholder="book" readOnly label="Issued Books" name="book" value={book ? book.map(books => books.title) : ""}/>
-                        {clickedUser.name && <button onClick={handleBook}><Link to="/admin-dashboard/manage-users/issued-books">Books</Link></button>}
+                        <IssuedBook/>
+                        {clickedUser.name && <button onClick={handleBook}>Books</button>}
                     </form>
                 </div>
 

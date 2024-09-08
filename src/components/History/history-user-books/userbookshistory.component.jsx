@@ -13,8 +13,8 @@ const UserBooksHistory = () => {
             <div className="flex justify-evenly border border-black rounded-md w-3/4 m-auto mb-10">
                 <p>User</p>
                 <p>Issued Book</p>
-                <p>Returen Book</p>
-                <p>Date</p>
+                <p>Isuue date</p>
+                <p>Return date</p>
             </div>
             {usersHistory && usersHistory.sort((a, b) => new Date(b.issue_date) - new Date(a.issue_date)).map((item) => {
                 return(
@@ -22,7 +22,7 @@ const UserBooksHistory = () => {
                         <p>{item.user.name}</p>
                         <p>{item.issued_book ? item.issued_book.title.slice(0,10) + (item.issued_book.title.length > 10 ? '...' : '') : 'null'}</p>
                         <p>{new Date(item.issue_date).toLocaleDateString()}</p>
-                        <p>{new Date(item.return_date).toLocaleDateString()}</p>
+                        <p>{item.return_date ? (new Date(item.return_date).toLocaleDateString()) : 'Not returned'}</p>
                     </div>
                 )
             })}

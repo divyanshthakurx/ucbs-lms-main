@@ -45,7 +45,7 @@ const BooksList = () => {
             </div>
         </div>
           <div className="bg-[#F0F0F0] w-full rounded-b-2xl overflow-y-auto h-[33.75rem] pt-6 px-6">
-            {filteredList && filteredList.filter((_, idx) => idx < 10).sort((a, b) => a.title.localeCompare(b.title)).map(book => <Book key={book.s_no} book_item={book} />)}
+            {filteredList && filteredList.sort((a, b) => a.title.localeCompare(b.title)).map(book =><Book key={book.s_no} book_item={book} />)}
           </div>
       </div>
     </>

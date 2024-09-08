@@ -5,7 +5,7 @@ import { createUBHistory, listUBHistory, updateUBHistory } from "../../lib/users
 
 const IssuedBooks = () => {
   const { updateThisUser, clickedUser, setclickedUser } = useContext(UsersContext);
-  let { clickedBook, setclickedBook } = useContext(BooksContext);
+  const { clickedBook, setclickedBook } = useContext(BooksContext);
   const [books, setBooks] = useState([]);
   const [historyId, sethistoryId] = useState();
 
@@ -25,8 +25,6 @@ const IssuedBooks = () => {
         clickedUser.book.push(clickedBook);
         updateThisUser(clickedUser);
         clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id);
-      } else {
-        return;
       }
     }
   }
@@ -49,16 +47,9 @@ const IssuedBooks = () => {
   };
 
   return (
-    <div>
-      <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
-        <p className="text-xl font-bold">{clickedUser.name}</p>
-        <p className="text-lg">Roll No: {clickedUser.roll_no}</p>
-        <p className="text-lg">Course: {clickedUser.course}</p>
-        <p className="text-lg">Year: {clickedUser.year}</p>
-      </div>
-
-      <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
-        <p className="text-xl font-bold">Issued Books</p>
+    <>
+      <div className="flex flex-col mb-4">
+        <p className="text-xl">Issued Books</p>
         <ul className="text-lg">
           {books && books.map((book) => (
             <li key={book.s_no}>
@@ -73,7 +64,7 @@ const IssuedBooks = () => {
           ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 };
 

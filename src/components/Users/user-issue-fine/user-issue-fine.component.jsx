@@ -22,6 +22,8 @@ const UpdateIssueFine = () => {
         setselectedUser(clickedUser);
     }, [clickedUser])
 
+    const {user_id, fine, name, roll_no, course, year, amount_paid} = selectedUser;
+
     const updateMultipleDocuments = async (documents) => {
         try {
             const updatePromises = documents.map((doc) => updateUFHistory(doc.$id));
@@ -34,22 +36,27 @@ const UpdateIssueFine = () => {
         }
     };
 
-    const handleFine = (e) => {
-        const val = clickedUser.fine + parseInt(e.target.value);
-        setselectedUser({...selectedUser, fine: val});
+    const getHistoryId = (user_rno) => {
+        listUFHistory().then((result) => {
+          const history = result.documents.filter((h) => h.user.roll_no === user_rno && h.fine_paid_on === null);
+          sethistories(history ? history : []);
+        });
     }
 
-    const {user_id, fine, name, roll_no, course, year, amount_paid} = selectedUser;
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         updateThisUser(selectedUser);
         if (fine > 0) {
-            createUFHistory(clickedUser.$id, fine);
-        }
-            
+            createUFHistory(clickedUser.$id, (fine - clickedUser.fine))
+        }            
         if(e.target[7].checked){
             getHistoryId(clickedUser.roll_no);
         }
+    }
+
+    const handleFine = (e) => {
+        const val = clickedUser.fine + parseInt(e.target.value);
+        setselectedUser({...selectedUser, fine: val});
     }
 
     const handlePaid = (e) => {
@@ -59,13 +66,6 @@ const UpdateIssueFine = () => {
             setselectedUser({...selectedUser, amount_paid: (amount_paid - clickedUser.fine), fine: clickedUser.fine});
         }
     }
-
-    const getHistoryId = (user_rno) => {
-        listUFHistory().then((result) => {
-          const history = result.documents.filter((h) => h.user.roll_no === user_rno && h.fine_paid_on === null);
-          sethistories(history ? history : []);
-        });
-      }
 
       return (
         <>
