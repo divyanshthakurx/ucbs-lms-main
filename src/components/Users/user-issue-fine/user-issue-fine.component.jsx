@@ -76,10 +76,10 @@ const UpdateIssueFine = () => {
     
                 <div className="text-xl font-semibold">
                     <form action="" onSubmit={handleSubmit}>
-                        <div className="flex justify-between">
+                        <div className="grid grid-cols-2 gap-10">
     
-                            <div>
-                                <div>
+                            <div className='flex flex-col gap-4'>
+                                <div className='flex flex-col gap-4'>
                                     <FormInput
                                         type="text" 
                                         placeholder="name" 
@@ -100,7 +100,7 @@ const UpdateIssueFine = () => {
                                         readOnly={true} 
                                         autoComplete="off"
                                     />
-                                    <div className="flex flex-col mb-4">
+                                    <div className="flex flex-col">
                                         <label htmlFor="Course">Course</label>
                                         <select 
                                             className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" 
@@ -128,7 +128,7 @@ const UpdateIssueFine = () => {
                                 </div>
                             </div>
     
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-4">
                                 <FormInput 
                                     type="number" 
                                     placeholder="user_id" 
@@ -155,7 +155,7 @@ const UpdateIssueFine = () => {
                                         <option value="3">3</option>
                                     </select>
                                 </div>
-                                <div className='flex gap-2'>
+                                <div className='flex justify-between gap-2'>
                                     <FormInput 
                                         type="number" 
                                         placeholder="fine alloted"
@@ -166,7 +166,8 @@ const UpdateIssueFine = () => {
                                         readOnly={true}
                                         autoComplete="off"
                                     />
-                                    <FormInput 
+                                    <FormInput
+                                        className="w-[30px] h-[30px]"
                                         type="checkbox" 
                                         label="Paid" 
                                         name="paid" 

@@ -10,7 +10,7 @@ const UpdateNewUser = () => {
         setselectedUser(clickedUser);
     }, [clickedUser]);
 
-    const {user_id, password, name, roll_no, course, year, book} = selectedUser;
+    const {user_id, password, name, roll_no, course, year} = selectedUser;
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -45,26 +45,22 @@ const UpdateNewUser = () => {
 
                 <div className="text-xl font-semibold">
                     <form action="">
-                        <div className="flex justify-between">
+                        <div className="grid grid-cols-2 gap-10">
 
-                            <div>
-                                <div>
-
-                                    <FormInput type="text" placeholder="name" onChange={handleChange} label="Name *" name="name" value={name}/>
-                                    <FormInput type="number" placeholder="roll_no" onChange={handleChange} label="Roll Number *" name="roll_no" value={roll_no}/>
-                                    <div className="flex flex-col mb-4">
-                                        <label htmlFor="">Course</label>
-                                        <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="course" id="course" value={course && course.toLowerCase()} onChange={handleChange}>
-                                            <option>Select</option>
-                                            <option value="bca">BCA</option>
-                                            <option value="bba">BBA</option>
-                                        </select>
-                                    </div>
-
+                            <div className='flex flex-col gap-4'>
+                                <FormInput type="text" placeholder="name" onChange={handleChange} label="Name *" name="name" value={name}/>
+                                <FormInput type="number" placeholder="roll_no" onChange={handleChange} label="Roll Number *" name="roll_no" value={roll_no}/>
+                                <div className="flex flex-col mb-4">
+                                    <label htmlFor="">Course</label>
+                                    <select className="h-10 mt-2 px-2 font-normal border border-black rounded-lg bg-[#F0F0F0]" name="course" id="course" value={course && course.toLowerCase()} onChange={handleChange}>
+                                        <option>Select</option>
+                                        <option value="bca">BCA</option>
+                                        <option value="bba">BBA</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-4">
 
                                 <FormInput type="number" placeholder="user_id" onChange={handleChange} label="User ID *" name="user_id" value={user_id}/>
                                 <FormInput type="password" placeholder="password" onChange={handleChange} label="Password *" name="password" value={password}/>

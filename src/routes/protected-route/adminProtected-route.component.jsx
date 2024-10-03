@@ -6,7 +6,7 @@ const AdminProtectedRoute = ({children}) => {
 
   useEffect(() => {
     if (localStorage.getItem("currentadmin") === "false") {
-      navigate("/log-in");
+      navigate("/login");
     }
   });
 

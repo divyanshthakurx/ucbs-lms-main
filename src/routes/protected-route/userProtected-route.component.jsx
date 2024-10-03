@@ -6,7 +6,7 @@ const UserProtectedRoute = ({children}) => {
 
   useEffect(() => {
     if (localStorage.getItem("currentuser") === "false") {
-      navigate("/log-in");
+      navigate("/login");
     }
   });
 

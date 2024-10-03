@@ -1,18 +1,17 @@
-import { useContext, useState, useEffect } from "react";
-import { UsersHistoryContext } from '../../context/usershistory.context';
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import { listUBHistory2 } from "../../lib/usershistory.appwrite";
+import UBHistory from "../History/user-book-history/user-book-history.component";
 
 const UserNotifications = () => {
-    const { listUsersHistory } = useContext(UsersHistoryContext);
-    const [usersHistory, setUsersHistory] = useState();
-
+    const [userHistory, setUserHistory] = useState();
+    const [curUser] = useOutletContext();
     useEffect(() => {
-        listUsersHistory().then((data) => setUsersHistory(data.documents));
-    }, []);
-
+        curUser.$id && listUBHistory2(curUser.$id).then((data) => setUserHistory(data.documents));
+    }, [curUser]);
     return(
         <>
-
-            <main className="pb-4 px-4 md:ml-64 h-full pt-20">
+            <main className="pb-4 px-4 h-full">
 
                 <div className="mb-4 h-full">
 
@@ -30,32 +29,24 @@ const UserNotifications = () => {
                         <div className="relative overflow-x-auto overflow-y-auto">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr className="text-center">                                      
-                                        <th scope="col" className="px-6 py-3">
-                                            Book Name
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Issued Date
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Return Date
-                                        </th>
-                                    </tr>
+                                <tr className="text-center font-bold">
+                                    <td className="px-6 py-4">
+                                        <p>Name</p>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <p>Book</p>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <p>Issue Date</p>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <p>Return Date</p>
+                                    </td>
+                                </tr>  
                                 </thead>
                                 <tbody>
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                                        
-                                        <td className="px-6 py-4">
-                                            How to Build
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            21/04/2024
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            28/04/2024
-                                        </td>
-                                    </tr>                                               
-                                </tbody>                               
+                                    {userHistory && userHistory.sort((a, b) => new Date(b.issue_date) - new Date(a.issue_date)).map((history) => <UBHistory key={history.$id} history={history} />)}
+                                </tbody>
                             </table>
                         </div>
                     </div> 

@@ -11,7 +11,6 @@ const UpdateBookComponent = () => {
     }, [clickedBook]);
     
     const {s_no, title, description, author, stock, course, image_url} = selectedBook;
-    console.log(course);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -39,7 +38,7 @@ const UpdateBookComponent = () => {
       </div>
       <div className="text-xl font-semibold">
         <form className="flex flex-col gap-4" id='book_form'>
-          <div className="flex justify-between">
+          <div className="grid grid-cols-2 gap-10">
             <div className="flex flex-col gap-4">
               <FormInput type="text" placeholder="image_url" onChange={handleChange} label="Book Image URL" name="image_url" value={image_url}/>
               <FormInput type="text" placeholder="author" onChange={handleChange} label="Book Author *" name="author" value={author}/>

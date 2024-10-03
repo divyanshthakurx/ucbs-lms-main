@@ -4,7 +4,7 @@ import Home from './routes/home/home.component';
 import LogIn from './routes/log-in/login.component';
 import ManageBooks from "./routes/manage-books/manage-books.component";
 import Notification from "./routes/notification/notification.component";
-import BooksList from "./components/Books/books-list/books-list.component";
+import UserBooksList from "./components/Books/user-books-list/user-books-list.component";
 import ManageUsers from "./routes/manage-users/manage-users.component";
 import AdminProtectedRoute from "./routes/protected-route/adminProtected-route.component";
 import UserProtectedRoute from "./routes/protected-route/userProtected-route.component";
@@ -15,7 +15,7 @@ import UserNotifications from "./components/user-notifications/user-notification
 import IssueFine from "./routes/issue-fine/issue-fine.component";
 import AdminLogIn from "./components/Admin-login/admin-login.component";
 import UserLogIn from "./components/user-login/user-login.component";
-import PayFine from "./components/pay-fine/pay-fine.component";
+import PayFine from "./components/History/pay-fine/pay-fine.component";
 
 const App = () => {
   return (
@@ -29,17 +29,17 @@ const App = () => {
 
         {/* Admin Protected Routes */}
         <Route path="/admin-dashboard" element={<AdminProtectedRoute><AdminNav/></AdminProtectedRoute>}>
-          <Route path="manage-books" element={<ManageBooks/>}/>
+          <Route index element={<ManageBooks/>}/>
           <Route path="history" element={<Notification/>}/>
           <Route path="manage-users" element={<ManageUsers/>}/>
           <Route path="issue-fine" element={<IssueFine/>}/>
-          <Route path="book-inventory" element={<BooksList/>}/>
+          <Route path="book-inventory" element={<UserBooksList/>}/>
         </Route>
 
         {/* User Protected Routes */}
         <Route path="/user-dashboard" element={<UserProtectedRoute><UserNav/></UserProtectedRoute>}>
           <Route index element={<UserIssuedBooks/>}/>
-          <Route path="book-inventory" element={<BooksList/>} />
+          <Route path="book-inventory" element={<UserBooksList/>} />
           <Route path="notifications" element={<UserNotifications/>} />
           <Route path="pay-fine" element={<PayFine/>} />
         </Route>

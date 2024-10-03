@@ -29,6 +29,15 @@ export const listUBHistory = async () => {
     return result;
 }
 
+export const listUBHistory2 = async (id) => {
+    const result = await databases.listDocuments(
+        database_id,
+        collection_id,
+        [Query.equal("user", [id]), Query.orderAsc("issue_date"), Query.limit(5000)]
+    );
+    return result;
+}
+
 export const updateUBHistory = async (id) => {
     const currentDate = new Date();
     const curDate = currentDate.toISOString();

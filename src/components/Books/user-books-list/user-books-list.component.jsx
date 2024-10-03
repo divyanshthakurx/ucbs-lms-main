@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { BooksContext } from "../../../context/books.context";
-import Book from "../book/book.component";
+import ShowBook from "../book-inventory/book-inventory.component";
 import { ReactComponent as Sort } from "../../../assets/img/user-dashboard/sort.svg";
 import 'flowbite';
 
 export let selectedBook = {}
-const BooksList = () => {
+const UserBooksList = () => {
   const {Books} = useContext(BooksContext);
   const [userSearch, setuserSearch] = useState("");
   const [course, setcourse] = useState("");
@@ -17,7 +17,7 @@ const BooksList = () => {
   return(
     <>
 
-        <main className="px-4">
+        <main className="pb-4 px-4 h-full">
               
             <div className="mb-4 h-full">
 
@@ -116,8 +116,8 @@ const BooksList = () => {
 
                   <div className="px-[2rem] md:px-0 lg:px-[2rem]">
                       <div className="my-4">
-                          <div className="w-full grid grid-cols-1 gap-4">
-                                {filteredList && filteredList.sort((a, b) => a.title.localeCompare(b.title)).map(book => <Book key={book.s_no} book_item={book} />)}
+                          <div className="w-full grid grid-cols-1 justify-items-center content-center gap-x-4 gap-y-8 xsm:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5">
+                                {filteredList && filteredList.sort((a, b) => a.title.localeCompare(b.title)).map(book => <ShowBook key={book.s_no} book_item={book} />)}
                           </div>
                       </div>
                   </div>
@@ -132,4 +132,4 @@ const BooksList = () => {
   )
 }
 
-export default BooksList;
+export default UserBooksList;

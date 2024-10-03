@@ -1,23 +1,14 @@
-import { useContext, useEffect ,useState } from "react";
-import { UsersContext } from "../../context/users.context";
-import { getUser } from "../../lib/user.appwrite";
+import { useOutletContext } from "react-router-dom";
 import ShowBook from "../Books/book-inventory/book-inventory.component";
 
 const UserIssuedBooks = () => {
-    const [curUser, setCurUser] = useState({});
-    const {Users} = useContext(UsersContext);
-    const user = Users && Users.find((user) => user.user_id == localStorage.getItem('currentuserCreds'));
-    const some = user && getUser(user.$id);
 
-    useEffect(() => {
-        some && some.then((result) => setCurUser(result));
-    }, [user]);
-
+    const [curUser] = useOutletContext();
     return (
         <>
 
             {/* main body */}
-            <main className="pb-4 px-4 md:ml-64 h-full pt-20">
+            <main className="pb-4 px-4 h-full">
                 <div className="mb-4 h-full">
 
                     <div>
