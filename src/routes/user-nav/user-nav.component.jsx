@@ -75,8 +75,8 @@ const UserNav = () => {
                     </svg>
                     <span className="sr-only">Toggle sidebar</span>
                   </button>
-                  <a className="flex items-center justify-between mr-4">
-                    <UcbsLogo className="w-8 h-8 rounded-full hidden lg:block"/></a>
+                  <Link to={'/'} className="flex items-center justify-between mr-4">
+                    <UcbsLogo className="w-8 h-8 rounded-full hidden lg:block"/></Link>
                     <div className="self-center text-2xl font-semibold whitespace-nowrap text-black">UCBS Library </div>
                 </div>
 
@@ -199,12 +199,12 @@ const UserNav = () => {
                 </Link>
               </li>
               <li>
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-red-300 dark:hover:bg-gray-700 group">
+                <Link to={"/login"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-red-300 dark:hover:bg-gray-700 group">
                     <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                     </svg>
                     <button onClick={handleLogout}><span className="flex-1 ms-3 whitespace-nowrap">Log out</span></button>
-                </a>
+                </Link>
               </li>
                             
             </ul>
@@ -223,7 +223,7 @@ const UserNav = () => {
           <div className="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white dark:bg-gray-800 z-20">
             <div className="bg-white rounded-lg border-2 shadow-lg dark:bg-gray-800">
                 <div className="w-full mx-auto max-w-screen-xl p-2 md:flex items-center justify-center text-center md:items-center md:justify-between">
-                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">Made with ❤️ by Team <a href="https://digitcrib.com/" className="hover:text-[#06FFFF] font-medium">DigitCrib™</a><br/> All Rights Reserved.
+                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">Made with ❤️ by Team <Link to="https://digitcrib.com/" className="hover:text-[#06FFFF] font-medium">DigitCrib™</Link><br/> All Rights Reserved.
                 </span>
                 </div>
             </div>

@@ -49,5 +49,6 @@ export const updateUBHistory = async (id) => {
             return_date: curDate
         }
     );
+    alert("User History updated successfully");
     return result;
 }

@@ -16,6 +16,9 @@ import IssueFine from "./routes/issue-fine/issue-fine.component";
 import AdminLogIn from "./components/Admin-login/admin-login.component";
 import UserLogIn from "./components/user-login/user-login.component";
 import PayFine from "./components/History/pay-fine/pay-fine.component";
+import BooksHistory from "./components/History/history-books/bookshistory.component";
+import FineHistory from "./components/History/history-fines/finehistory.component";
+import UserBooksHistory from "./components/History/history-user-books/userbookshistory.component";
 
 const App = () => {
   return (
@@ -30,7 +33,11 @@ const App = () => {
         {/* Admin Protected Routes */}
         <Route path="/admin-dashboard" element={<AdminProtectedRoute><AdminNav/></AdminProtectedRoute>}>
           <Route index element={<ManageBooks/>}/>
-          <Route path="history" element={<Notification/>}/>
+          <Route path="history" element={<Notification/>}>
+            <Route index element={<BooksHistory/>}/>
+            <Route path="fines" element={<FineHistory/>}/>
+            <Route path="users" element={<UserBooksHistory/>}/>
+          </Route>
           <Route path="manage-users" element={<ManageUsers/>}/>
           <Route path="issue-fine" element={<IssueFine/>}/>
           <Route path="book-inventory" element={<UserBooksList/>}/>

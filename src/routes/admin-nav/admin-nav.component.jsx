@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as ManageBookImg } from "../../../src/assets/img/admin-dashboard/manage-book.svg";
 import { ReactComponent as ManageUserImg } from "../../../src/assets/img/admin-dashboard/manage-user.svg";
 import { ReactComponent as HistoryImg } from "../../../src/assets/img/admin-dashboard/history.svg";
@@ -9,11 +9,14 @@ import { ReactComponent as About } from "../../assets/img/user-dashboard/about.s
 
 const AdminNav = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.setItem('currentadmin', 'false');
     navigate("/login");
   }
+
+  const isActiveLink = (path) => location.pathname === path;
   return(
     <>  
       
@@ -138,31 +141,31 @@ const AdminNav = () => {
             
             <ul className="space-y-2 pt-5 mt-2 border-t border-gray-300">
               <li>                                                               
-                <Link to="/admin-dashboard " className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <Link to="/admin-dashboard " className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <ManageBookImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Manage Books</span>
                 </Link>
               </li>
               <li>                                                               
-                <Link to="/admin-dashboard/manage-users" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <Link to="/admin-dashboard/manage-users" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/manage-users') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <ManageUserImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Manage Users</span>
                 </Link>
               </li>
               <li>      
-                <Link to="/admin-dashboard/book-inventory" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <Link to="/admin-dashboard/book-inventory" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/book-inventory') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <BookInventory className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Book Inventory</span>
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/history" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <Link to="/admin-dashboard/history" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/history') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <HistoryImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>                    
                   <span className="flex-1 ms-3 whitespace-nowrap">History</span>
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/issue-fine" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <Link to="/admin-dashboard/issue-fine" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/issue-fine') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <IssueFineImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>                    
                   <span className="flex-1 ms-3 whitespace-nowrap">Issue Fine</span>
                 </Link>

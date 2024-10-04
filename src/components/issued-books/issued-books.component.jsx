@@ -6,35 +6,44 @@ import { createUBHistory, listUBHistory, updateUBHistory } from "../../lib/users
 const IssuedBooks = () => {
   const { updateThisUser, clickedUser, setclickedUser } = useContext(UsersContext);
   const { clickedBook, setclickedBook } = useContext(BooksContext);
-  const [books, setBooks] = useState([]);
-  const [historyId, sethistoryId] = useState();
+  const [books, setBooks] = useState(clickedUser?.book || []);
+  const [historyId, setHistoryId] = useState();
 
   useEffect(() => {
-    historyId && updateUBHistory(historyId);
-    sethistoryId(null);
+    if (historyId) {
+      updateUBHistory(historyId);
+      setHistoryId(null);
+    }
   }, [historyId]);
 
   useEffect(() => {
-    setBooks(clickedUser.book);
+    if (clickedUser?.book) {
+      setBooks([...clickedUser.book]);
+    }
   }, [clickedUser]);
 
-  if(clickedBook){
-    if (clickedUser && clickedUser.book && clickedBook.s_no) {
-      const existingBook = clickedUser.book.find(b => b.s_no === clickedBook.s_no);
+  useEffect(() => {
+    if (clickedBook && clickedUser?.book && clickedBook.s_no) {
+      const existingBook = clickedUser.book.find((b) => b.s_no === clickedBook.s_no);
       if (!existingBook) {
-        clickedUser.book.push(clickedBook);
-        updateThisUser(clickedUser);
+        const updatedBooks = [...clickedUser.book, clickedBook];
+        const updatedUser = { ...clickedUser, book: updatedBooks };
+        updateThisUser(updatedUser);
+        setclickedUser(updatedUser);
         clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id);
       }
     }
-  }
+  }, [clickedBook, clickedUser, updateThisUser, setclickedUser]);
 
-  const getHistoryId = (user_rno, book_sno) => {
-    listUBHistory().then((result) => {
+  const getHistoryId = async (user_rno, book_sno) => {
+    try {
+      const result = await listUBHistory();
       const history = result.documents.find((h) => h.user.roll_no === user_rno && h.issued_book.s_no === book_sno);
-      sethistoryId(history ? history.$id : '');
-    });
-  }
+      setHistoryId(history ? history.$id : null);
+    } catch (error) {
+      console.error("Error fetching history:", error);
+    }
+  };
 
   const handleDelete = async (book) => {
     const updatedBooks = books.filter((b) => b.s_no !== book.s_no);
@@ -43,7 +52,7 @@ const IssuedBooks = () => {
     updateThisUser(updatedUser);
     setclickedUser(updatedUser);
     setclickedBook(null);
-    getHistoryId(clickedUser.roll_no, book.s_no);
+    await getHistoryId(clickedUser.roll_no, book.s_no);
   };
 
   return (

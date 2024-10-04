@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import { BooksProvider } from './context/books.context';
 import { UsersProvider } from './context/users.context';
 import { UsersHistoryProvider } from './context/usershistory.context';
-import { BooksHistoryProvider } from './context/bookshistory.context';
 import { AdminProvider } from './context/admin.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,9 +17,7 @@ root.render(
         <UsersProvider>
           <BooksProvider>
             <UsersHistoryProvider>
-              <BooksHistoryProvider>
-                <App />
-              </BooksHistoryProvider>
+              <App />
             </UsersHistoryProvider>
           </BooksProvider>
         </UsersProvider>

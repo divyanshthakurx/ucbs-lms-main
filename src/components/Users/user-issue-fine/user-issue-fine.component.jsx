@@ -8,6 +8,7 @@ const UpdateIssueFine = () => {
     const {updateThisUser, clickedUser} = useContext(UsersContext);
     const [selectedUser, setselectedUser] = useState({});
     const [histories, sethistories] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const handleUpdate = async () => {
@@ -36,21 +37,45 @@ const UpdateIssueFine = () => {
         }
     };
 
-    const getHistoryId = (user_rno) => {
-        listUFHistory().then((result) => {
+    const validateForm = (user) => {
+        const newErrors = validateUser(user);
+        return newErrors;
+    };
+    const validateUser = (user) => {
+        const newErrors = {};
+        if (user.fine - clickedUser.fine < 0) {
+            newErrors.fine = "Enter a valid value";
+        }
+        return newErrors;
+    };
+
+    const getHistoryId = async (user_rno) => {
+        try {
+          const result = await listUFHistory();
           const history = result.documents.filter((h) => h.user.roll_no === user_rno && h.fine_paid_on === null);
-          sethistories(history ? history : []);
-        });
-    }
+          sethistories(history ? history.$id : null);
+        } catch (error) {
+          console.error("Error fetching history:", error);
+        }
+      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        updateThisUser(selectedUser);
-        if (fine > 0) {
-            createUFHistory(clickedUser.$id, (fine - clickedUser.fine))
-        }            
         if(e.target[7].checked){
-            getHistoryId(clickedUser.roll_no);
+            setErrors({});
+        }
+        const validationErrors = validateForm(selectedUser);
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+        } else {
+            updateThisUser(selectedUser);
+            if (fine > 0) {
+                createUFHistory(clickedUser.$id, (fine - clickedUser.fine))
+            }            
+            if(e.target[7].checked){
+                getHistoryId(clickedUser.roll_no);
+            }
+            setErrors({});
         }
     }
 
@@ -184,6 +209,7 @@ const UpdateIssueFine = () => {
                                     id="fine"
                                     onChange={handleFine}
                                     autoComplete="off"
+                                    error={errors.fine}
                                 />
                             </div>
                         </div>
