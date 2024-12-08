@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { BooksContext } from "../../../context/books.context";
 const Book = ({book_item}) => {
     const {setclickedBook} = useContext(BooksContext);
-    const {title, author, image_url, stock, course, s_no} = book_item;
+    const {title, author, image_url, stock, course} = book_item;
     const handleClick = () => {
         setclickedBook(book_item);
     }

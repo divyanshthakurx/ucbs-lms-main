@@ -13,24 +13,38 @@ import 'flowbite';
 
 const UserNav = () => {
   const navigate = useNavigate();
-  const [curUser, setCurUser] = useState({});
-  const {Users} = useContext(UsersContext);
-  const user = Users && Users.find((user) => {
-    return user.user_id.toString() === localStorage.getItem('currentuserCreds')
-  });
-  const some = user && getUser(user.$id);
+  const [curUser, setCurUser] = useState(null);
+  const { Users } = useContext(UsersContext);
 
+  const user = Users?.find(
+    (user) => user.user_id.toString() === localStorage.getItem("currentuserCreds")
+  );
+
+  const some = user ? getUser(user.$id) : null;
   useEffect(() => {
-      some && some.then((result) => setCurUser(result));
-  }, [user]);
+    let isMounted = true;
 
-  const {name, course, year, user_id} = curUser;
+    if (some) {
+      some
+        .then((result) => {
+          if (isMounted) setCurUser(result);
+        })
+        .catch((error) => {
+          console.error("Error fetching user:", error);
+        });
+    }
+    return () => {
+      isMounted = false; 
+    };
+  }, [some]);
+
+  const { name, course, year, user_id } = curUser || {}; 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.setItem('currentuser', 'false');
-    localStorage.removeItem('currentuserCreds');
+    localStorage.setItem("currentuser", "false");
+    localStorage.removeItem("currentuserCreds");
     navigate("/login");
-  }
+  };
 
   return(
     <>  
