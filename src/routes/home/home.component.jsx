@@ -15,7 +15,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
   return(
     <>
 
-      <div className="font-outfit">
+      <div className="font-outfit ">
 
         {/* <!-- section 1 --> */}
         <section>
