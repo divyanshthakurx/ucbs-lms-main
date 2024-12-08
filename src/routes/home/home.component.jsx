@@ -3,9 +3,9 @@ import { ReactComponent as StudentAvatar } from "../../assets/img/home/student-p
 import { ReactComponent as FeePayment } from "../../assets/img/home/fee-payment.svg";
 import { ReactComponent as UcbsLogo } from "../../assets/img/home/ucbs-logo.svg";
 import { ReactComponent as HpuLogo } from "../../assets/img/home/hpu-logo.svg";
-import 'flowbite';
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import 'flowbite';
 
 const Home = () => {
 
@@ -17,7 +17,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
 
       <div className="font-outfit">
 
-        {/* <!-- section 2 --> */}
+        {/* <!-- section 1 --> */}
         <section>
           
           <div className="w-full h-auto bg-home-bg bg-cover bg-center bg-no-repeat">
@@ -39,7 +39,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                 </button>
                 </div>
                 <div className={`w-full ${menuOpen ? '' : 'hidden'}`}>
-                  <div className="w-full items-center justify-between md:flex md:w-auto md:order-1">
+                  <div className="w-full items-center justify-between md:flex md:w-auto md:order-1 ">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent md:bg-opacity-20 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                       <li>
                       <div className="block py-2 px-3 text-white bg-[#0A433D] rounded md:bg-transparent md:text-[#C21717] md:p-0 md:dark:text-blue-500" aria-current="page">Home</div>
